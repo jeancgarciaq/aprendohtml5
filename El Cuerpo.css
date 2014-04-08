@@ -1,0 +1,45 @@
+#contenedor {
+	background-color:#CFF;
+}
+header {
+	background-color:#F00;
+	width:100%;
+	height:200px;
+}
+nav {
+	background-color:#00F;
+	width:100%;
+	height:50px;
+}
+nav ul li {
+	display:inline-block;
+	text-decoration: none;
+	color:#FF0;
+}
+section {
+	float: left;
+	width:80%;
+	height:600px;
+	background-color:#090;
+	margin-bottom: 20px;
+}
+article {
+	background-color:#30F;
+	width:100%;
+	height:250px;
+	margin-bottom: 20px;
+}
+aside {
+	float:left;
+	height:600px;
+	width:20%
+	background-color:#0C0;
+	background-color: #0C0;
+	margin-left:10px;
+}
+footer {
+	clear:both;
+	background-color:#FF0;
+	margin-top:20px;
+	padding-top:10px;
+}
