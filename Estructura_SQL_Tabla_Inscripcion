@@ -1,0 +1,69 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.8
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 07-05-2014 a las 12:54:14
+-- Versión del servidor: 5.1.73-cll
+-- Versión de PHP: 5.4.23
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `comercit_ventas`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Inscripcion`
+--
+
+CREATE TABLE IF NOT EXISTS `Inscripcion` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Pais` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `Nombre` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `Identificacion` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `Sexo` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  `Edad` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  `Correo` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `Ciudad` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `Estado` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `Fecha` date NOT NULL,
+  `Llegada` date NOT NULL,
+  `Salida` date NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Identificacion` (`Identificacion`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=17 ;
+
+--
+-- Volcado de datos para la tabla `Inscripcion`
+--
+
+INSERT INTO `Inscripcion` (`ID`, `Pais`, `Nombre`, `Identificacion`, `Sexo`, `Edad`, `Correo`, `Ciudad`, `Estado`, `Fecha`, `Llegada`, `Salida`) VALUES
+(2, 'Venezuela', 'Jean Carlo García', 'V14125160', 'Masculino', '36-40 años', 'comercito@outlook.com', 'Naguanagua', 'Carabobo', '2014-06-05', '1969-12-31', '1969-12-31'),
+(3, 'Venezuela', 'Juancito Trucupei', 'V11248468', 'Masculino', '19-24 años', 'tienecorreo@comingo.com', 'La Esmeralda', 'Amazonas', '2014-06-05', '1969-12-31', '1969-12-31'),
+(4, 'Venezuela', 'Pedro Sinforoso', 'V456789', 'Masculino', '41-50 años', 'yalotengo@hotmail.com', 'El Cantón', 'Barinas', '2014-07-05', '2014-07-05', '2014-07-05'),
+(5, 'Venezuela', 'Cara Guanajo', 'V123456789', 'Masculino', '16-18 años', 'siyque@ya.com', 'El Callao', 'Bolívar', '2014-07-05', '2014-10-05', '1969-12-31'),
+(6, 'Venezuela', 'Ahora SI', 'V4567891', 'Masculino', '16-18 años', 'siyque@ya.com', 'El Callao', 'Bolívar', '2014-07-05', '2014-10-05', '1969-12-31'),
+(7, 'Venezuela', 'Ultimo Intento', 'V141251607', 'Masculino', '25-30 años', 'micorreo@correo.com', 'Valle de Guanape', 'Anzoátegui', '2014-07-05', '1969-12-31', '1969-12-31'),
+(8, 'Venezuela', 'Probando de Nuevo', 'V321654', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '0000-00-00', '0000-00-00', '0000-00-00'),
+(9, 'Venezuela', 'Viendo de Nuevo', 'V3216541', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '2014-07-05', '1969-12-31', '1969-12-31'),
+(10, 'Venezuela', 'Aquí Voy', 'V32165417', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '2014-07-05', '1969-12-31', '1969-12-31'),
+(11, 'Venezuela', 'Aquí Voy', 'V72165417', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '2014-07-05', '1969-12-31', '1969-12-31'),
+(12, 'Venezuela', 'Estoy casi listo', 'V21654178', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '2014-07-05', '1969-12-31', '1969-12-31'),
+(13, 'Venezuela', 'Falta Poco', 'V216541578', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '2014-07-05', '1969-12-31', '1969-12-31'),
+(14, 'Venezuela', 'Falta Poco Ya', 'V116541578', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '2014-07-05', '1969-12-31', '1969-12-31'),
+(15, 'Venezuela', 'Falta Poco 2', 'V106541578', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '2014-07-05', '1969-12-31', '1969-12-31'),
+(16, 'Venezuela', 'Falta Poco 3', 'V10654158', 'Masculino', '36-40 años', 'micorreo@correo.com', 'La Esmeralda', 'Amazonas', '2014-07-05', '1969-12-31', '1969-12-31');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
