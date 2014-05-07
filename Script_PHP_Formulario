@@ -29,9 +29,9 @@ $pareja = $_POST['pareja'];
 //fecha de inscripción
 $fecha = date('Y-m-d', strtotime($_POST['datepicker']));
 //fecha de llegada
-$llegada = date('Y-m-d', strtotime($_POST['datepicker1']));
+$llegada = date('Y-m-d', strtotime($_POST['fecha1']));
 //fecha de salida
-$salida = date('Y-m-d', strtotime($_POST['datepicker2']));
+$salida = date('Y-m-d', strtotime($_POST['fecha2']));
 
 //Esta es la tercera tabla Acompañantes
 //$a_nombre = (implode(',', $_POST['a_nombre']));	
