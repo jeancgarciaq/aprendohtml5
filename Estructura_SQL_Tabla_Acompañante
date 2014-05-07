@@ -1,0 +1,54 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.8
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 07-05-2014 a las 12:01:44
+-- Versión del servidor: 5.1.73-cll
+-- Versión de PHP: 5.4.23
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `comercit_ventas`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Acompañantes`
+--
+
+CREATE TABLE IF NOT EXISTS `Acompañantes` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `Sexo` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  `Edad` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  `Parentesco` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `Identificacion` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `Acompañantes`
+--
+
+INSERT INTO `Acompañantes` (`ID`, `Nombre`, `Sexo`, `Edad`, `Parentesco`, `Identificacion`) VALUES
+(1, 'Jana García', 'Femenino', '3-7 años', 'Hijo(a)', 'V14125160'),
+(2, 'El que Faltaba', 'Masculino', '25-30 años', 'Discípulo(a)', 'V11248468'),
+(3, '', '', '', '', ''),
+(4, '', '', '', '', ''),
+(5, 'A,B,C', '', '', '', ''),
+(6, 'El Sapo,Sapito\n', '', '', '', ''),
+(7, '', '', '', '', '');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
