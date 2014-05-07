@@ -1,0 +1,63 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.8
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 07-05-2014 a las 12:52:12
+-- Versión del servidor: 5.1.73-cll
+-- Versión de PHP: 5.4.23
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `comercit_ventas`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Hospedaje`
+--
+
+CREATE TABLE IF NOT EXISTS `Hospedaje` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `Identificacion` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `Hospedaje` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
+  `Transporte` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
+  `Acompañado` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=18 ;
+
+--
+-- Volcado de datos para la tabla `Hospedaje`
+--
+
+INSERT INTO `Hospedaje` (`ID`, `Nombre`, `Identificacion`, `Hospedaje`, `Transporte`, `Acompañado`) VALUES
+(2, 'Jean Carlo García', 'V14125160', 'Si', 'No', 'Acompanado'),
+(3, 'Wladimir Roque', 'V14125160', 'No', 'No', 'Opcion'),
+(4, 'Juancito Trucupei', 'V11248468', 'No', 'No', 'Acompanado'),
+(5, 'Pedro Sinforoso', 'V456789', 'No', 'Si', 'Acompanado'),
+(6, 'Cara Guanajo', 'V123456789', 'No', 'No', 'Acompanado'),
+(7, 'Ahora SI', 'V4567891', 'No', 'No', 'Acompanado'),
+(8, 'Ultimo Intento', 'V141251607', 'No', 'No', 'Acompanado'),
+(9, 'Probando de Nuevo', 'V321654', 'No', 'No', 'Acompanado'),
+(10, 'Viendo de Nuevo', 'V3216541', 'No', 'No', 'Acompanado'),
+(11, 'Aquí Voy', 'V32165417', 'No', 'No', 'Acompanado'),
+(12, 'Aquí Voy', 'V72165417', 'No', 'No', 'Acompanado'),
+(13, 'Estoy casi listo', 'V21654178', 'No', 'No', 'Acompanado'),
+(14, 'Falta Poco', 'V216541578', 'No', 'No', 'Acompanado'),
+(15, 'Falta Poco Ya', 'V116541578', 'No', 'No', 'Acompanado'),
+(16, 'Falta Poco 2', 'V106541578', 'No', 'No', 'Acompanado'),
+(17, 'Falta Poco 3', 'V10654158', 'No', 'No', 'Acompanado');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
