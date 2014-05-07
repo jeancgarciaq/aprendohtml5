@@ -1,0 +1,105 @@
+<?php
+//Conexión con la base de datos
+$mysqli = new mysqli("localhost", "comercit_admin", "Iri(ipzy&T0J", "comercit_ventas");
+		if ($mysqli === false) {
+								die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
+								}
+
+//Codificamos los caracteres a UTF-8
+$mysqli->set_charset("utf8");
+
+//Obtenemos datos del formulario
+//Primera tabla Inscripcion
+$paises = $_POST['paises'];
+$nombre = $_POST['nombre'];
+$identificacion = $_POST['identificacion'];
+$re_identificacion = $_POST['re_identificacion'];
+$sexo = $_POST['sexo'];
+$edad = $_POST['edad'];
+$mi_email = $_POST['mi_email'];
+$re_mi_email = $_POST['re_mi_email'];
+$ciudad = $_POST['ciudad'];
+$estado = $_POST['estado'];
+
+//Segunda tabla Hospedaje
+$transporte = $_POST['transporte'];
+$hospedaje = $_POST['hospedaje'];
+$pareja = $_POST['pareja'];
+
+//fecha de inscripción
+$fecha = date('Y-m-d', strtotime($_POST['datepicker']));
+//fecha de llegada
+$llegada = date('Y-m-d', strtotime($_POST['datepicker1']));
+//fecha de salida
+$salida = date('Y-m-d', strtotime($_POST['datepicker2']));
+
+//Esta es la tercera tabla Acompañantes
+//$a_nombre = (implode(',', $_POST['a_nombre']));	
+/*$a_edad = var_dump(',', $_POST['a_edad[]']);
+$a_sexo = var_dump(',', $_POST['a_sexo[]']);
+$parentesco = var_dump(',', $_POST['parentesco[]']);*/
+
+//Validamos la identificación y el email
+if ($identificacion != $re_identificacion) {
+	die('No coincide el número de identificación<br><a href="/Formulario Inscripcion.html">Volver</a>');
+}
+if ($mi_email != $re_mi_email) {
+	die('No coincide el correo<br><a href="/Formulario Inscripción.html">Volver</a>');
+}
+
+//Ingresar la información a la base de datos, primero se verifica si es de Venezuela
+if ($paises == 'Venezuela'){
+	//Se verifica el numero de idenficacion
+	$nuevo_registro = mysqli_query($mysqli, "SELECT Identificacion FROM Inscripcion where Identificacion='$identificacion'");
+	if (mysqli_num_rows($nuevo_registro)>0) {
+		echo "<p>Esta persona ya está registrada</p><p><a href='/Formulario Inscripcion.html'>Volver</a></p>";}
+	//Si no existe se inserta el registro
+	else {
+		$sql = "INSERT INTO Inscripcion (Pais, Nombre, Identificacion, Sexo, Edad, Correo, Ciudad, Estado, Fecha, Llegada, Salida) VALUES ('$paises', '$nombre', '$identificacion', '$sexo', '$edad', '$mi_email', '$ciudad', '$estado', '$fecha', '$llegada', '$salida')";
+		if ($mysqli->query($sql)=== true) {
+			echo 'Nueva Inscripcion con id: ' . $mysqli->insert_id . ' ha sido a&ntildeadida.';}
+		else {
+			echo "ERROR: No fue posible ejecutar $sql. " . $mysqli->error;}
+		}
+	 }
+
+//Si no es de Venezuela, se inserta solamente estos datos
+else {
+	$sql = "INSERT INTO Inscripcion (Pais, Nombre, Identificacion, Sexo, Edad, Correo, Fecha) VALUES ('$paises', '$nombre', '$identificacion', '$sexo', '$edad', '$mi_email', '$fecha')";
+	if ($mysqli->query($sql)=== true) {
+		echo 'Nueva Inscripcion con id: ' . $mysqli->insert_id . ' ha sido a&ntildeadida.';}
+	else {
+		echo "ERROR: No fue posible ejecutar $sql. " . $mysqli->error;
+	}
+}
+
+//Ingresamos datos para la logística
+$logistica = "INSERT INTO Hospedaje (Nombre, Identificacion, Hospedaje, Transporte, Acompañado) VALUES ('$nombre', '$identificacion', '$hospedaje', '$transporte', '$pareja')";
+	if ($mysqli->query($logistica)=== true) {
+		echo 'Sus Acompañantes con id: ' . $mysqli->insert_id . ' han sido registrados.';}
+	else {
+		echo "ERROR: No fue posible ejecutar $sql. " . $mysqli->error;
+	}
+
+//Inscribir a los acompañantes
+if ($pareja == 'Acompanado') {
+	$mysqli->query('INSERT INTO Acompañantes ('.json_encode($_POST['a_nombre']).')');
+	$sql = $mysqli->query("SELECT Nombre FROM Acompañantes WHERE 1");
+	$ROW = $sql->fetch_assoc();
+	$array = json_decode($ROW['Nombre'],true);}
+
+//$acompano = 'INSERT INTO Acompañantes (Nombre) VALUES ("'.implode(',', $_POST['a_nombre']).'")';
+	
+	if ($mysqli->query($acompano)=== true) {
+		echo 'Sus Acompañantes con id: ' . $mysqli->insert_id . ' han sido registrados.';}
+	else {
+		echo "ERROR: No fue posible ejecutar $sql. " . $mysqli->error;
+	}
+
+/*$sql= 'INSERT INTO input_field (firstname)
+       VALUES
+       ("'.implode(',', $_POST['firstname']).'")';*/
+// cierra conexión
+$mysqli->close();
+
+?>
