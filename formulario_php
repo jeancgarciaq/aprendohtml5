@@ -1,0 +1,814 @@
+<?php
+	include ("calendario/calendario.php");
+?>
+<!doctype html>
+<html lang="es">
+<!--Desarrollado por Jean Carlo García-->
+	<head>
+		<meta charset="utf-8">
+		<title>Inscripción Congreso</title>
+        <link rel="stylesheet" type="text/css" href="congreso.css" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+        <link rel="stylesheet" href="demo.css" />
+        <link rel="stylesheet" href="osx.css" />
+        <link rel="stylesheet" href="calendario/estilo.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="zepto.min.js"></script>
+        <script src="jquery.simplemodal.js"></script>
+        <script src="osx.js"></script>
+        <script type="text/javascript" src="congreso.js"></script>
+        <script type="text/javascript" src="calendario/javascripts.js"></script>
+        <!--Función para desplegar calendario de fecha de Inscripción-->
+        <script type="text/javascript">
+		jQuery(function($){
+		$.datepicker.regional['es'] = {
+			closeText: 'Cerrar',
+			prevText: '&#x3c;Ant',
+			nextText: 'Sig&#x3e;',
+			currentText: 'Hoy',
+			monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+			'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+			monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+			'Jul','Ago','Sep','Oct','Nov','Dic'],
+			dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
+			dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
+			dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
+			weekHeader: 'Sm',
+			dateFormat: 'dd/mm/yy',
+			firstDay: 1,
+			isRTL: false,
+			showMonthAfterYear: false,
+			yearSuffix: ''};
+		$.datepicker.setDefaults($.datepicker.regional['es']);
+	});
+			$(document).ready(function() {
+			   $("#datepicker").datepicker();
+			});
+    </script>
+  
+	</head>
+	<body>
+		<section>
+			<header>
+				<h1>Bienvenido al Congreso de Jóvenes</h1>
+				<h2>La Revolución de Jesús</h2>
+			</header>
+			<article>
+					<h3>Formulario de Inscripción</h3>
+                    <!--Desplega la sección de ayuda-->
+                    <p id="modal"><a href="#" class="osx">Necesitas Ayuda, haz clic</a></p>
+                    <!--Aquí comienza el formulario-->
+					<form id="fcalen" name="fcalen" method="post" action="congreso.php">
+						<p id="fecha"></p>
+						<script>
+							//Inserta la fecha de hoy
+							var mydate=new Date()
+							var year=mydate.getYear()
+							if (year < 1000)
+							year+=1900
+							var day=mydate.getDay()
+							var month=mydate.getMonth()
+							var daym=mydate.getDate()
+							if (daym<10)
+							daym="0"+daym
+							var dayarray=new Array("Dom","Lun","Mar","Mie","Jue","Vie","Sab")
+							var montharray=new Array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic")
+							var cl = document.getElementById("fecha")
+							cl.innerHTML = "Hoy es: " + dayarray[day]+ ", " + daym + " de " + montharray[month] + " de " + year;
+						</script>
+						<p>Seleccione su País: <select id="paises" name="paises" required>
+						<optgroup label="América">
+							<option value="Antigua y Barbuda">Antigua y Barbuda</option>
+							<option value="Argentina">Argentina</option>
+							<option value="Bahamas">Bahamas</option>
+							<option value="Barbados">Barbados</option>
+							<option value="Belice">Belice</option>
+							<option value="Bolivia">Bolivia</option>
+							<option value="Brasil">Brasil</option>
+							<option value="Canadá">Canadá</option>
+							<option value="Chile">Chile</option>
+							<option value="Colombia">Colombia</option>
+							<option value="Costa Rica">Costa Rica</option>
+							<option value="Cuba">Cuba</option>
+							<option value="Dominica">Dominica</option>
+							<option value="Ecuador">Ecuador</option>
+							<option value="El Salvador">El Salvador</option>
+							<option value="Estados Unidos">Estados Unidos</option>
+							<option value="Granada">Granada</option>
+							<option value="Guatemala">Guatemala</option>
+							<option value="Guayana">Guayana</option>
+							<option value="Haití">Haití</option>
+							<option value="Honduras">Honduras</option>
+							<option value="Jamaica">Jamaica</option>
+							<option value="México">México</option>
+							<option value="Nicaragua">Nicaragua</option>
+							<option value="Panamá">Panamá</option>
+							<option value="Paraguay">Paraguay</option>
+							<option value="Perú">Perú</option>
+							<option value="República Dominicana">República Dominicana</option>
+							<option value="San Cristóbal y Nieves">San Cristóbal y Nieves</option>
+							<option value="San Vicente y las Granadinas">San Vicente y las Granadinas</option>
+							<option value="Santa Lucía">Santa Lucía</option>
+							<option value="Surinam">Surinam</option>
+							<option value="Trinidad y Tobago">Trinidad y Tobago</option>
+							<option value="Uruguay">Uruguay</option>
+							<option value="Venezuela">Venezuela</option>
+						</optgroup>
+						<optgroup label="África">
+							<option value="Angola">Angola</option>
+							<option value="Argelia">Argelia</option>
+							<option value="Benín">Benín</option>
+							<option value="Botsuana">Botsuana</option>
+							<option value="Burkina Faso">Burkina Faso</option>
+							<option value="Burundi">Burundi</option>
+							<option value="Cabo Verde">Cabo Verde</option>
+							<option value="Camerún">Camerún</option>
+							<option value="Chad">Chad</option>
+							<option value="Comoras">Comoras</option>
+							<option value="Costa de Marfil">Costa de Marfil</option>
+							<option value="Egipto">Egipto</option>
+							<option value="Eritrea">Eritrea</option>
+							<option value="Etiopía">Etiopía</option>
+							<option value="Gabón">Gabón</option>
+							<option value="Gambia">Gambia</option>
+							<option value="Ghana">Ghana</option>
+							<option value="Guinea">Guinea</option>
+							<option value="Guinea-Bisáu">Guinea-Bisáu</option>
+							<option value="Guinea Ecuatorial">Guinea Ecuatorial</option>
+							<option value="Kenia">Kenia</option>
+							<option value="Lesoto">Lesoto</option>
+							<option value="Liberia">Liberia</option>
+							<option value="Libia">Libia</option>
+							<option value="Madagascar">Madagascar</option>
+							<option value="Malaui">Malaui</option>
+							<option value="Malí">Malí</option>
+							<option value="Marruecos">Marruecos</option>
+							<option value="Mauricio">Mauricio</option>
+							<option value="Mauritania">Mauritania</option>
+							<option value="Mozambique">Mozambique</option>
+							<option value="Namibia">Namibia</option>
+							<option value="Níger">Níger</option>
+							<option value="Nigeria">Nigeria</option>
+							<option value="República Centroafricana">República Centroafricana</option>
+							<option value="República del Congo">República del Congo</option>
+							<option value="República Democrática del Congo">República Democrática del Congo</option>
+							<option value="Ruanda">Ruanda</option>
+							<option value="Santo Tomé y Príncipe">Santo Tomé y Príncipe</option>
+							<option value="Senegal">Senegal</option>
+							<option value="Seychelles">Seychelles</option>
+							<option value="Sierra Leona">Sierra Leona</option>
+							<option value="Somalia">Somalia</option>
+							<option value="Suazilandia">Suazilandia</option>
+							<option value="Sudáfrica">Sudáfrica</option>
+							<option value="Sudán">Sudán</option>
+							<option value="Sudán del Sur">Sudán del Sur</option>
+							<option value="Tanzania">Tanzania</option>
+							<option value="Togo">Togo</option>
+							<option value="Túnez">Túnez</option>
+							<option value="Uganda">Uganda</option>
+							<option value="Yibuti">Yibuti</option>
+							<option value="Zambia">Zambia</option>
+							<option value="Zimbabue">Zimbabue</option>
+						</optgroup>
+						<optgroup label="Europa">
+							<option value="Albania">Albania</option>
+							<option value="Alemania">Alemania</option>
+							<option value="Andorra">Andorra</option>
+							<option value="Armenia">Armenia</option>
+							<option value="Austria">Austria</option>
+							<option value="Azerbaiyán">Azerbaiyán</option>
+							<option value="Bélgica">Bélgica</option>
+							<option value="Bielorrusia">Bielorrusia</option>
+							<option value="Bosnia y Herzegovina">Bosnia y Herzegovina</option>
+							<option value="Bulgaria">Bulgaria</option>
+							<option value="Chipre">Chipre</option>
+							<option value="Ciudad del Vaticano">Ciudad del Vaticano</option>
+							<option value="Croacia">Croacia</option>
+							<option value="Dinamarca">Dinamarca</option>
+							<option value="Eslovaquia">Eslovaquia</option>
+							<option value="Eslovenia">Eslovenia</option>
+							<option value="España">España</option>
+							<option value="Estonia">Estonia</option>
+							<option value="Finlandia">Finlandia</option>
+							<option value="Francia">Francia</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Grecia">Grecia</option>
+							<option value="Hungría">Hungría</option>
+							<option value="Irlanda">Irlanda</option>
+							<option value="Islandia">Islandia</option>
+							<option value="Italia">Italia</option>
+							<option value="Kazajistán">Kazajistán</option>
+							<option value="Letonia">Letonia</option>
+							<option value="Liechtenstein">Liechtenstein</option>
+							<option value="Lituania">Lituania</option>
+							<option value="Luxemburgo">Luxemburgo</option>
+							<option value="Malta">Malta</option>
+							<option value="Moldavia">Moldavia</option>
+							<option value="Mónaco">Mónaco</option>
+							<option value="Montenegro">Montenegro</option>
+							<option value="Noruega">Noruega</option>
+							<option value="Países Bajos">Países Bajos</option>
+							<option value="Polonia">Polonia</option>
+							<option value="Portugal">Portugal</option>
+							<option value="Reino Unido">Reino Unido</option>
+							<option value="República Checa">República Checa</option>
+							<option value="República de Macedonia">República de Macedonia</option>
+							<option value="Rumanía">Rumanía</option>
+							<option value="Rusia">Rusia</option>
+							<option value="San Marino">San Marino</option>
+							<option value="Serbia">Serbia</option>
+							<option value="Suecia">Suecia</option>
+							<option value="Suiza">Suiza</option>
+							<option value="Turquía">Turquía</option>
+							<option value="Ucrania">Ucrania</option>
+						</optgroup>
+						<optgroup label="Asia">
+							<option value="Afganistán">Afganistán</option>
+							<option value="Arabia Saudita">Arabia Saudita</option>
+							<option value="Armenia">Armenia</option>
+							<option value="Azerbaiyán">Azerbaiyán</option>
+							<option value="Baréin">Baréin</option>
+							<option value="Bangladés">Bangladés</option>
+							<option value="Bután">Bután</option>
+							<option value="Birmania">Birmania/Myanmar</option>
+							<option value="Brunéi">Brunéi</option>
+							<option value="Camboya">Camboya</option>
+							<option value="Catar">Catar</option>
+							<option value="China">China</option>
+							<option value="Chipre">Chipre</option>
+							<option value="Corea del Norte">Corea del Norte</option>
+							<option value="Corea del Sur">Corea del Sur</option>
+							<option value="Emiratos Árabes Unidos">Emiratos Árabes Unidos</option>
+							<option value="Filipinas">Filipinas</option>
+							<option value="Georgia">Georgia</option>
+							<option value="India">India</option>
+							<option value="Indonesia">Indonesia</option>
+							<option value="Irak">Irak</option>
+							<option value="Irán">Irán</option>
+							<option value="Israel">Israel</option>
+							<option value="Japón">Japón</option>
+							<option value="Jordania">Jordania</option>
+							<option value="Kazajistán">Kazajistán</option>
+							<option value="Kirguistán">Kirguistán</option>
+							<option value="Kuwait">Kuwait</option>
+							<option value="Laos">Laos</option>
+							<option value="Líbano">Líbano</option>
+							<option value="Malasia">Malasia</option>
+							<option value="Maldivas">Maldivas</option>
+							<option value="Mongolia">Mongolia</option>
+							<option value="Nepal">Nepal</option>
+							<option value="Omán">Omán</option>
+							<option value="Pakistán">Pakistán</option>
+							<option value="Rusia">Rusia</option>
+							<option value="Singapur">Singapur</option>
+							<option value="Siria">Siria</option>
+							<option value="Sri Lanka">Sri Lanka</option>
+							<option value="Tailandia">Tailandia</option>
+							<option value="Tayikistán">Tayikistán</option>
+							<option value="Timor Oriental">Timor Oriental</option>
+							<option value="Turkmenistán">Turkmenistán</option>
+							<option value="Turquía">Turquía</option>
+							<option value="Uzbekistán">Uzbekistán</option>
+							<option value="Vietnam">Vietnam</option>
+							<option value="Yemen">Yemen</option>
+						</optgroup>
+						<optgroup label="Oceanía">
+							<option value="Australia">Australia</option>
+							<option value="Fiyi">Fiyi</option>
+							<option value="Islas Marshall">Islas Marshall</option>
+							<option value="Islas Salomón">Islas Salomón</option>
+							<option value="Kiribati">Kiribati</option>
+							<option value="Micronesia">Micronesia</option>
+							<option value="Nauru">Nauru</option>
+							<option value="Nueva Zelanda">Nueva Zelanda</option>
+							<option value="Palaos">Palaos</option>
+							<option value="Papúa Nueva Guinea">Papúa Nueva Guinea</option>
+							<option value="Samoa">Samoa</option>
+							<option value="Tonga">Tonga</option>
+							<option value="Tuvalu">Tuvalu</option>
+							<option value="Vanuatu">Vanuatu</option>
+						</optgroup>
+					</select>
+                    <p>Nombre y Apellido: <input type="text" name="nombre" id="nombre" autofocus value="Nombre Apellido" onclick="javascript:select()" required></p>
+					<p>Nº C.I/Pasaporte: <input type="text" name="identificacion" id="idenfificacion" value="V14125160" onclick="javascript:select()" required></p>
+                    <p>Confirme Nº C.I/Pasaporte: <input type="text" name="re_identificacion" id="re_idenfificacion" value="V14125160" onclick="javascript:select()" required></p>
+                    <p>Edad: <select name="edad" id="edad">
+                    	<option value="0-2 años">0-2 años</option>
+                    	<option value="3-7 años">3-7 años</option>
+                    	<option value="8-11 años">8-11 años</option>
+                    	<option value="12-15 años">12-15 años</option>
+                    	<option value="16-18 años">16-18 años</option>
+                    	<option value="19-24 años">19-24 años</option>
+                    	<option value="25-30 años">25-30 años</option>
+                    	<option value="30-35 años">30-35 años</option>
+                    	<option value="36-40 años">36-40 años</option>
+                    	<option value="41-50 años">41-50 años</option>
+                    	<option value="51 ó +años">51-Más años</option>
+                    </select></p>
+            		<p>Sexo:<select name="sexo" id="sexo" required>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                            </select></p>
+               		<p>Email: <input type="email" name="mi_email" id="mi_email" value="micorreo@correo.com" onclick="javascript:select()" required> </p>
+                    <p>Confirme Email: <input type="email" name="re_mi_email" id="re_mi_email" value="micorreo@correo.com" onclick="javascript:select()" required></p>
+                <div id="si_venezuela">
+				  <p>Si usted es de Venezuela, por favor, complete los siguientes datos:</p>
+				  <p>Ciudad/Población: <select id="ciudad" name="ciudad" required>
+							<optgroup label="Amazonas">
+								<option value="La Esmeralda">La Esmeralda</option>
+								<option value="San Fernando de Atabapo">San Fernando de Atabapo</option>
+								<option value="Puerto Ayacucho">Puerto Ayacucho</option>
+								<option value="Isla Ratón">Isla Ratón</option>
+								<option value="San Juan de Manapiare">San Juan de Manapiare</option>
+								<option value="Maroa">Maroa</option>
+								<option value="San Carlos de Río Negro">San Carlos de Río Negro</option>
+							</optgroup>
+							<optgroup label="Anzoátegui">
+								<option value="Anaco">Anaco</option>
+								<option value="Aragua de Barcelona">Aragua de Barcelona</option>
+								<option value="Lechería">Lechería</option>
+								<option value="Puerto Píritu">Puerto Píritu</option>
+								<option value="Valle de Guanape">Valle de Guanape</option>
+								<option value="Pariaguán">Pariaguán</option>
+								<option value="Guanta">Guanta</option>
+								<option value="Soledad">Soledad</option>
+								<option value="Mapire">Mapire</option>
+								<option value="Puerto La Cruz">Puerto La Cruz</option>
+								<option value="Onoto">Onoto</option>
+								<option value="San Mateo">San Mateo</option>
+								<option value="Clarines">Clarines</option>
+								<option value="Cantaura">Cantaura</option>
+								<option value="Píritu">Píritu</option>
+								<option value="San José de Guanipa">San José de Guanipa</option>
+								<option value="El Tigrito">El Tigrito</option>
+								<option value="Boca de Uchire">Boca de Uchire</option>
+								<option value="Santa Ana">Santa Ana</option>
+								<option value="Barcelona">Barcelona</option>
+								<option value="El Tigre">El Tigre</option>
+								<option value="El Chaparro">El Chaparro</option>
+							</optgroup>
+							<optgroup label="Apure">
+								<option value="Achaguas">Achaguas</option>
+								<option value="Biruaca">Biruaca</option>
+								<option value="Bruzual">Bruzual</option>
+								<option value="Guasdualito">Guasdualito</option>
+								<option value="San Juan de Payara">San Juan de Payara</option>
+								<option value="Elorza">Elorza</option>
+								<option value="San Fernando de Apure">San Fernando de Apure</option>
+							</optgroup>
+							<optgroup label="Aragua">
+								<option value="San Mateo">San Mateo</option>
+								<option value="Camatagua">Camatagua</option>
+								<option value="Santa Rita">Santa Rita</option>
+								<option value="Maracay">Maracay</option>
+								<option value="Santa Cruz">Santa Cruz</option>
+								<option value="La Victoria">La Victoria</option>
+								<option value="El Consejo">El Consejo</option>
+								<option value="Palo Negro">Palo Negro</option>
+								<option value="El Limón">El Limón</option>
+								<option value="Ocumare de la Costa">Ocumare de la Costa</option>
+								<option value="San Casimiro">San Casimiro</option>
+								<option value="San Sebastián">San Sebastián</option>
+								<option value="Turmero">Turmero</option>
+								<option value="Las Tejerías">Las Tejerías</option>
+								<option value="Cagua">Cagua</option>
+								<option value="Colonia Tovar">Colonia Tovar</option>
+								<option value="Barbacoas">Barbacoas</option>
+								<option value="Villa de Cura">Villa de Cura</option>
+							</optgroup>
+							<optgroup label="Barinas">
+								<option value="Sabaneta">Sabaneta</option>
+								<option value="El Cantón">El Cantón</option>
+								<option value="Socopo">Socopo</option>
+								<option value="Arismendi">Arismendi</option>
+								<option value="Barinas">Barinas</option>
+								<option value="Barinitas">Barinitas</option>
+								<option value="Barrancas">Barrancas</option>
+								<option value="Santa Bárbara">Santa Bárbara</option>
+								<option value="Obispos">Obispos</option>
+								<option value="Ciudad Bolivia">Ciudad Bolivia</option>
+								<option value="Libertad">Libertad</option>
+								<option value="Ciudad de Nutrias">Ciudad de Nutrias</option>
+							</optgroup>
+							<optgroup label="Bolívar">
+								<option value="Ciudad Guayana">Ciudad Guayana</option>
+								<option value="Caicara del Orinoco">Caicara del Orinoco</option>
+								<option value="El Callao">El Callao</option>
+								<option value="Santa Elana de Uairén">Santa Elana de Uairén</option>
+								<option value="Ciudad Bolívar">Ciudad Bolívar</option>
+								<option value="El Palmar">El Palmar</option>
+								<option value="Upata">Upata</option>
+								<option value="Ciudad Piar">Ciudad Piar</option>
+								<option value="Guasipati">Guasipati</option>
+								<option value="Tumeremo">Tumeremo</option>
+								<option value="Maripa">Maripa</option>
+							</optgroup>
+							<optgroup label="Carabobo" selected>
+								<option value="Bejuma">Bejuma</option>
+								<option value="Güigüe">Güigüe</option>
+								<option value="Mariara">Mariara</option>
+								<option value="Guacara">Guacara</option>
+								<option value="Morón">Morón</option>
+								<option value="Tocuyito">Tocuyito</option>
+								<option value="Los Guayos">Los Guayos</option>
+								<option value="Miranda">Miranda</option>
+								<option value="Montalbán">Montalbán</option>
+								<option value="Naguanagua">Naguanagua</option>
+								<option value="Puerto Cabello">Puerto Cabello</option>
+								<option value="San Diego">San Diego</option>
+								<option value="San Joaquín">San Joaquín</option>
+								<option value="Valencia">Valencia</option>
+							</optgroup>
+							<optgroup label="Cojedes">
+								<option value="Cojedes">Cojedes</option>
+								<option value="El Pao">El Pao</option>
+								<option value="Tinaquillo">Tinaquillo</option>
+								<option value="El Baúl">El Baúl</option>
+								<option value="Macapo">Macapo</option>
+								<option value="Libertad">Libertad</option>
+								<option value="Las Vegas">Las Vegas</option>
+								<option value="San Carlos">San Carlos</option>
+								<option value="Tinaco">Tinaco</option>
+							</optgroup>
+							<optgroup label="Delta Amacuro">
+						        <option value="Curiapo">Curiapo</option>
+						        <option value="Sierra Imataca">Sierra Imataca</option>
+						        <option value="Pedernales">Pedernales</option>
+						        <option value="Tucupita">Tucupita</option>
+							</optgroup>
+							<optgroup label="Falcón">
+						        <option value="San Juan de los Cayos">San Juan de los Cayos</option>
+						        <option value="San Luis">San Luis</option>
+						        <option value="Capatárida">Capatárida</option>
+						        <option value="Yaracal">Yaracal</option>
+						        <option value="Punto Fijo">Punto Fijo</option>
+						        <option value="La Vela de Coro">La Vela de Coro</option>
+						        <option value="Dabajuro">Dabajuro</option>
+						        <option value="Pedregal">Pedregal</option>
+						        <option value="Pueblo Nuevo">Pueblo Nuevo</option>
+						        <option value="Churuguara">Churuguara</option>
+						        <option value="Jacura">Jacura</option>
+						        <option value="Santa Cruz de los Taques">Santa Cruz de los Taques</option>
+						        <option value="Mene de Mauroa">Mene de Mauroa</option>
+						        <option value="Santa Ana de Coro">Santa Ana de Coro</option>
+						        <option value="Chichiriviche">Chichiriviche</option>
+						        <option value="Palmasola">Palmasola</option>
+						        <option value="Cabure">Cabure</option>
+						        <option value="Píritu">Píritu</option>
+						        <option value="Mirimire">Mirimire</option>
+						        <option value="Tucacas">Tucacas</option>
+						        <option value="La Cruz de Taratara">La Cruz de Taratara</option>
+						        <option value="Tocópero">Tocópero</option>
+						        <option value="Santa Cruz de Bucaral">Santa Cruz de Bucaral</option>
+						        <option value="Urumaco">Urumaco</option>
+						        <option value="Puerto Cumarebo">Puerto Cumareno</option>
+							</optgroup>
+							<optgroup label="Guárico">
+						        <option value="Camaguán">Camaguán</option>
+						        <option value="Chaguaramas">Chaguaramas</option>
+						        <option value="El Socorro">El Socorro</option>
+						        <option value="Calabozo">Calabozo</option>
+						        <option value="Tucupido">Tucupido</option>
+						        <option value="Altagracia de Orituco">Altagracia de Orituco</option>
+						        <option value="San Juan de los Morros">San Juan de los Morros</option>
+						        <option value="El Sombrero">El Sombrero</option>
+						        <option value="Las Mercedes">Las Mercedes</option>
+						        <option value="Valle de la Pascua">Valle de la Pascua</option>
+						        <option value="Ortiz">Ortiz</option>
+						        <option value="Zaraza">Zaraza</option>
+						        <option value="Guayabal">Guayabal</option>
+						        <option value="San José de Guaribe">San José de Guaribe</option>
+						        <option value="Santa María de Ipire">Santa María de Ipire</option>
+							</optgroup>
+							<optgroup label="Lara">
+						        <option value="Sanare">Sanare</option>
+						        <option value="Duaca">Duaca</option>
+						        <option value="Barquisimeto">Barquisimeto</option>
+						        <option value="Quíbor">Quíbor</option>
+						        <option value="El Tocuyo">El Tocuyo</option>
+						        <option value="Cabudare">Cabudare</option>
+						        <option value="Sarare">Sarare</option>
+						        <option value="Carora">Carora</option>
+						        <option value="Siquisique">Siquisique</option>
+						    </optgroup>
+						    <optgroup label="Mérida">
+						        <option value="El Vigia">El Vigia</option>
+						        <option value="La Azulita">La Azulita</option>
+						        <option value="Santa Cruz de Mora">Santa Cruz de Mora</option>
+						        <option value="Acarigua">Acarigua</option>
+						        <option value="Canagua">Canagua</option>
+						        <option value="Ejido">Ejido</option>
+						        <option value="Tucani">Tucani</option>
+						        <option value="Santo Domingo">Santo Domingo</option>
+						        <option value="Guaraque">Guaraque</option>
+						        <option value="Arapuey">Arapuey</option>
+						        <option value="Torondoy">Torondoy</option>
+						        <option value="Mérida">Mérida</option>
+						        <option value="Timotes">Timotes</option>
+						        <option value="Santa Elena de Arenales">Santa Elena de Arenales</option>
+						        <option value="Santa María de Caparo">Santa María de Caparo</option>
+						        <option value="Pueblo Llano">Pueblo Llano</option>
+						        <option value="Mucuchíes">Mucuchíes</option>
+						        <option value="Bailadores">Bailadores</option>
+						        <option value="Tabay">Tabay</option>
+						        <option value="Lagunillas">Lagunillas</option>
+						        <option value="Tovar">Tovar</option>
+						        <option value="Nueva Bolivia">Nueva Bolivia</option>
+						        <option value="Zea">Zea</option>
+						    </optgroup>
+						    <optgroup label="Miranda">
+						        <option value="Caucagua">Caucagua</option>
+						        <option value="San José de Barlovento">San José de Barlovento</option>
+						        <option value="Ntra Sra del Rosario de Baruta">Ntra. Sra. del Rosario de Baruta</option>
+						        <option value="Higuerote">Higuerote</option>
+						        <option value="Mamporal">Mamporal</option>
+						        <option value="Carrizal">Carrizal</option>
+						        <option value="Chacao">Chacao</option>
+						        <option value="Charallave">Charallave</option>
+						        <option value="El Hatillo">El Hatillo</option>
+						        <option value="Los Teques">Los Teques</option>
+						        <option value="Santa Teresa del Tuy">Santa Teresa del Tuy</option>
+						        <option value="Ocumare del Tuy">Ocumare del Tuy</option>
+						        <option value="San Antonio de los Altos">San Antonio de los Altos</option>
+						        <option value="Río Chico">Río Chico</option>
+						        <option value="Santa Lucía">Santa Lucía</option>
+						        <option value="Cúpira">Cúpira</option>
+						        <option value="Guarenas">Guarenas</option>
+						        <option value="San Francisco de Yare">San Francisco de Yare</option>
+						        <option value="Petare">Petare</option>
+						        <option value="Cúa">Cúa</option>
+						        <option value="Guatire">Guatire</option>
+						    </optgroup>
+						    <optgroup label="Monagas">
+						        <option value="San Antonio">San Antonio</option>
+						        <option value="Aguasay">Aguasay</option>
+						        <option value="Caripito">Caripito</option>
+						        <option value="Caripe">Caripe</option>
+						        <option value="Caicara">Caicara</option>
+						        <option value="Punta de Mata">Punta de Mata</option>
+						        <option value="Temblador">Temblador</option>
+						        <option value="Maturín">Maturín</option>
+						        <option value="Aragua de Maturín">Aragua de Maturín</option>
+						        <option value="Quiriquire">Quiriquire</option>
+						        <option value="Santa Bárbara">Santa Bárbara</option>
+						        <option value="Barrancas">Barrancas</option>
+						        <option value="Uracoa">Uracoa</option>
+						    </optgroup>
+						    <optgroup label="Nueva Esparta">
+						        <option value="Plaza Paraguachi">Plaza Paraguachi</option>
+						        <option value="La Asunción">La Asunción</option>
+						        <option value="San Juan Bautista">San Juan Bautista</option>
+						        <option value="El Valle del Espíritu Santo">El Valle del Espíritu Santo</option>
+						        <option value="Santa Ana">Santa Ana</option>
+						        <option value="Pampatar">Pampatar</option>
+						        <option value="Juan Griego">Juan Griego</option>
+						        <option value="Porlamar">Porlamar</option>
+						        <option value="Boca del Río">Boca del Río</option>
+						        <option value="Punta de Piedras">Punta de Piedras</option>
+						        <option value="San Pedro de Coche">San Pedro de Coche</option>
+						    </optgroup>
+						    <optgroup label="Portuguesa">
+						        <option value="Agua Blanca">Agua Blanca</option>
+						        <option value="Araure">Araure</option>
+						        <option value="Píritu">Píritu</option>
+						        <option value="Guanare">Guanare</option>
+						        <option value="Guanarito">Guanarito</option>
+						        <option value="Paraíso de Chabasquén">Paraíso de Chabasquén</option>
+						        <option value="Ospino">Ospino</option>
+						        <option value="Acarigua">Acarigua</option>
+						        <option value="Papelón">Papelón</option>
+						        <option value="Boconoito">Boconoito</option>
+						        <option value="San Rafael de Onoto">San Rafael de Onoto</option>
+						        <option value="El Playón">El Playón</option>
+						        <option value="Biscucuy">Biscucuy</option>
+						        <option value="Villa Bruzual">Villa Bruzual</option>
+						    </optgroup>
+						    <optgroup label="Sucre">
+						        <option value="Casanay">Casanay</option>
+						        <option value="San José de Aerocuar">San José de Aerocuar</option>
+						        <option value="Rio Caribe">Rio Caribe</option>
+						        <option value="El Pilar">El Pilar</option>
+						        <option value="Carúpano">Carúpano</option>
+						        <option value="Marigüitar">Marigüitar</option>
+						        <option value="Yaguaraparo">Yaguaraparo</option>
+						        <option value="Araya">Araya</option>
+						        <option value="Tunapuy">Tunapuy</option>
+						        <option value="Irapa">Irapa</option>
+						        <option value="San Antonio del Golfo">San Antonio del Golfo</option>
+						        <option value="Cumanacoa">Cumanacoa</option>
+						        <option value="Cariaco">Cariaco</option>
+						        <option value="Cumaná">Cumaná</option>
+						        <option value="Güiria">Güiria</option>
+						    </optgroup>
+						    <optgroup label="Táchira">
+						        <option value="Cordero">Cordero</option>
+						        <option value="Las Mesas">Las Mesas</option>
+						        <option value="Colón">Colón</option>
+						        <option value="San Antonio del Táchira">San Antonio del Táchira</option>
+						        <option value="Táriba">Táriba</option>
+						        <option value="Santa Ana del Táchira">Santa Ana del Táchira</option>
+						        <option value="San Rafael del Piñal">San Rafael del Piñal</option>
+						        <option value="San José de Bolívar">San José de Bolívar</option>
+						        <option value="La Fría">La Fría</option>
+						        <option value="Palmira">Palmira</option>
+						        <option value="Capacho Nuevo">Capacho Nuevo</option>
+						        <option value="La Grita">La Grita</option>
+						        <option value="El Cobre">El Cobre</option>
+						        <option value="Rubio">Rubio</option>
+						        <option value="Capacho Viejo">Capacho Viejo</option>
+						        <option value="Abejales">Abejales</option>
+						        <option value="Lobatera">Lobatera</option>
+						        <option value="Michelena">Michelena</option>
+						        <option value="Coloncito">Coloncito</option>
+						        <option value="Ureña">Ureña</option>
+						        <option value="Delicias">Delicias</option>
+						        <option value="La Tendida">La Tendida</option>
+						        <option value="San Cristóbal">San Cristóbal</option>
+						        <option value="Umuquena">Umuquena</option>
+						        <option value="Seboruco">Seboruco</option>
+						        <option value="San Simón">San Simón</option>
+						        <option value="Queniquea">Queniquea</option>
+						        <option value="San Josecito">San Josecito</option>
+						        <option value="Pregonero">Pregonero</option>
+						    </optgroup>
+						    <optgroup label="Trujillo">
+						        <option value="Santa Isabel">Santa Isabel</option>
+						        <option value="Boconó">Boconó</option>
+						        <option value="Sabana Grande">Sabana Grande</option>
+						        <option value="Chejendé">Chejendé</option>
+						        <option value="Carache">Carache</option>
+						        <option value="Escuque">Escuque</option>
+						        <option value="El Paradero">El Paradero</option>
+						        <option value="Campo Elías">Campo Elías</option>
+						        <option value="Santa Apolonia">Santa Apolonia</option>
+						        <option value="El Dividive">El Dividive</option>
+						        <option value="Monte Carmelo">Monte Carmelo</option>
+						        <option value="Motatán">Motatán</option>
+						        <option value="Pampán">Pampán</option>
+						        <option value="Pampanito">Pampanito</option>
+						        <option value="Betijoque">Betijoque</option>
+						        <option value="Carvajal">Carvajal</option>
+						        <option value="Sabana de Mendoza">Sabana de Mendoza</option>
+						        <option value="Trujillo">Trujillo</option>
+						        <option value="La Quebrada">La Quebrada</option>
+						        <option value="Valera">Valera</option>
+						        <optgroup label="Vargas">
+						        <option value="La Guaira">La Guaira</option>
+						    </optgroup>
+						    <optgroup label="Yaracuy">
+						        <option value="San Pablo">San Pablo</option>
+						        <option value="Aroa">Aroa</option>
+						        <option value="Chivacoa">Chivacoa</option>
+						        <option value="Cocorote">Cocorote</option>
+						        <option value="Independencia">Independencia</option>
+						        <option value="Sabana de Parra">Sabana de Parra</option>
+						        <option value="Boraure">Boraure</option>
+						        <option value="Yumare">Yumare</option>
+						        <option value="Nirgua">Nirgua</option>
+						        <option value="San Felipe">San Felipe</option>
+						        <option value="Guama">Guama</option>
+						        <option value="Urachiche">Urachiche</option>
+						        <option value="Farriar">Farriar</option>
+						    </optgroup>
+						    <optgroup label="Zulia">
+						        <option value="El Toro">El Toro</option>
+						        <option value="San Timoteo">San Timoteo</option>
+						        <option value="Cabimas">Cabimas</option>
+						        <option value="Encontrados">Encontrados</option>
+						        <option value="San Carlos del Zulia">San Carlos del Zulia</option>
+						        <option value="Pueblo Nuevo">Pueblo Nuevo</option>
+						        <option value="El Chivo">El Chivo</option>
+						        <option value="La Concepción">La Concepción</option>
+						        <option value="Casigua el Cubo">Casigua el Cubo</option>
+						        <option value="Concepción">Concepción</option>
+						        <option value="Ciudad Ojeda">Ciudad Ojeda</option>
+						        <option value="Machiques">Machiques</option>
+						        <option value="San Rafael del Moján">San Rafael del Moján</option>
+						        <option value="Maracaibo">Maracaibo</option>
+						        <option value="Los Puertos de Altagracia">Los Puertos de Altagracia</option>
+						        <option value="Sinamaica">Sinamaica</option>
+						        <option value="La Villa del Rosario">La Villa del Rosario</option>
+						        <option value="San Francisco">San Francisco</option>
+						        <option value="Santa Rita">Santa Rita</option>
+						        <option value="Tía Juana">Tía Juana</option>
+						        <option value="Bobures">Bobures</option>
+						        <option value="Bachaquero">Bachaquero</option>
+							</optgroup>
+							</select></p>
+						    <p>Estado: <select id="estado" name="estado" required>
+						        <option value="Amazonas">Amazonas</option>
+						        <option value="Anzoátegui">Anzoátegui</option>
+						        <option value="Apure">Apure</option>
+						        <option value="Aragua">Aragua</option>
+						        <option value="Barinas">Barinas</option>
+						        <option value="Bolívar">Bolívar</option>
+						        <option value="Carabobo" selected>Carabobo</option>
+						        <option value="Cojedes">Cojedes</option>
+						        <option value="Delta Amacuro">Delta Amacuro</option>
+						        <option value="Distrito Capital">Distrito Capital</option>
+						        <option value="Falcón">Falcón</option>
+						        <option value="Guárico">Guárico</option>
+						        <option value="Lara">Lara</option>
+						        <option value="Mérida">Mérida</option>
+						        <option value="Miranda">Miranda</option>
+						        <option value="Monagas">Monagas</option>
+						        <option value="Nueva Esparta">Nueva Esparta</option>
+						        <option value="Portuguesa">Portuguesa</option>
+						        <option value="Sucre">Sucre</option>
+						        <option value="Táchira">Táchira</option>
+						        <option value="Trujillo">Trujillo</option>
+						        <option value="Vargas">Vargas</option>
+						        <option value="Yaracuy">Yaracuy</option>
+						        <option value="Zulia">Zulia</option>
+							</select></p>
+					</div>
+							<div id="logistica">
+                                <p>¿Cuenta con Transporte?</p>
+                                <p><select name="transporte" id="transporte" required>
+                                    <option value="No">No</option>
+                                    <option value="Si">Si</option>
+                                  </select></p>
+                                <p>¿Cuenta con Hospedaje?</p>
+                                <p><select name="hospedaje" required>
+                                    <option value="No">No</option>
+                                    <option value="Si">Si</option>
+                                </select></p>
+                                <p>¿Asiste Solo o Acompañado?</p>
+                                <p><select name="pareja" id="pareja" required>
+                                	<option value="Opcion">Indique una opción</option>
+                                    <option value="Solo">Solo</option>
+                                    <option value="Acompanado">Acompañado</option>
+                                   </select></p>
+							</div>
+                            <p class="mi_fecha">Fecha Inscripción: <input type="text" name="datepicker" id="datepicker" readonly size="12" required/></p>
+                                <!--<form name="fcalen">-->
+                                <p class="mi_fecha">Fecha Llegada:  
+                                <?php
+                                    escribe_formulario_fecha_vacio("fecha1","fcalen");
+                                ?>
+                                </p>
+                                <p class="mi_fecha">Fecha Salida: 
+                                <?php
+                                escribe_formulario_fecha_vacio("fecha2","fcalen");
+                                ?>
+                                </p>
+                                <!--</form>-->
+               		  <div id="acompanantes">
+								<p>Me acompaña:<select id="si_comp" name="si_comp">
+                                	<option value="Opcion">Escoja una Opción</option>
+									<option value="Familia">Familia</option>
+									<option value="Amigo(a)">Amigo(a)</option>
+									<option value="Congregacion">Congregación</option>
+								</select></p>
+							<div id="si_compania">
+								<table id="acompana">
+			                    	<tr>
+			                    		<th>Nombre y Apellido</th>
+			                    		<th>Edad</th>
+			                    		<th>Sexo</th>
+			                    		<th>Parentesco</th>
+			                    	</tr>
+			                    </table>
+							</div>
+							<p id="inscribir"><input type="submit" value="Inscribirse"><input type="reset" value="Borrar"></p></div>
+							</form>
+			</article>
+            <article>
+				<div id="osx-modal-content" class="scroll">
+	               <div id="osx-modal-title">Ayuda para Llenar el Formulario</div>
+                   <div class="close"><a href="#" class="simplemodal-close">x</a></div>
+                   <div id="osx-modal-data">
+                      	<h5>Seleccione su país</h5>
+                            <p>Los países están organizados por continentes</p>
+        				<h5>Identificándose</h5>
+                           <p>Es importante que coloque su nombre y apellido exactamente como aparece en su documento de identificación</p>
+                           <span>Ejemplo: Jean C García Q</span>
+                        <h5>Nº Documento de Identificación</h5>
+                            <p>Por favor debe dolocar su Número de Pasaporte o Cédula de Identidad exactamente igual a su documento de identificación</p>
+                            <span>Ejemplo Venezolanos de Nacimiento o Nacionalizados: V14125160. Extranjeros: E82456789</span>
+                            <h5>Seleccione su Edad</h5>
+			                    <p>Seleccione el rango de edad que más se adecúe a su edad real</p>
+                            <h5>Indique su Sexo</h5>
+                                <small>Para el hospedaje se toma en cuenta el sexo de la persona</small>
+                            <h5>Indique su correo</h5>
+                                <p>Recuerde tenerlo activo y poseer acceso a él. Nos comunicaremos por esta vía</p>
+                            <fieldset>
+                            <legend>Si usted es de Venezuela</legend>
+                            <h5>Seleccione su Municipio</h5>
+                                <p>Si no encuentra su localidad, investigue a qué municipio pertenece</p>
+                            <h5>Seleccione su Estado</h5>
+                                <p>Si no encuentra su Estado, comuníquese con nosotros ayuda@congresodejovenes.com</p>
+	                         </fieldset>
+    	                    <h5>Quién lo(a) Acompaña</h5>
+			                    <ol>
+			                    	<li><b>Familia:</b> Todo aquel o aquella que posee parentesco con nosotros por consaguinidad o afinidad (no incluimos yerno, nuera, suegro o suegra)</li>
+			                    	<li><b>Amigo(a):</b> Todo aquel o aquella que pertenece a nuestro círculo de amistad (involucra una relación de años)</li>
+			                    	<li><b>Congregación:</b> Son todos nuestros hermanos en Cristo Jesús </li>
+			                    </ol>
+	             </div>
+               </div>
+           </article>
+		</section>
+</body>
+</html>
