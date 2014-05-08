@@ -1,0 +1,32 @@
+$(document).ready(function() {
+	$("#paises").on('change', function(event) {
+		if(this.value=='Venezuela') {
+			$("#si_venezuela").show();
+			}
+		else {
+			$("#si_venezuela").hide();
+			}
+	});
+	//Si viene solo, sólo se envía el formulario:
+	$('#pareja').on(
+    'change',
+    function(event){
+        if(this.value=='Solo')
+	        $("#mi_fecha2").after('<p id="inscribir"><input type="submit" value="Inscribirse"><input type="reset" value="Borrar"></p>');
+		else if (this.value=='Acompanado')
+		//Muestro el formulario oculto
+		$("#acompanantes").show();
+		 }
+);
+//Agrego más personas
+	$("#si_comp").on(
+	'change',
+	function(event) {
+		if(this.value=="'Familia'||'Amigo(a)'||'Congregacion'");
+		var $acompanante;
+		$acompanante = prompt("¿Cuántos Acompañantes?");
+		for (i = 0; i < $acompanante; i++){
+			$("#acompana").append('<tr><td><input type="text" name="a_nombre[]" id="a_nombre[]" autofocus required></td><td><select name="a_edad[]" id="a_edad[]"><option value="0-2 años">0-2 años</option><option value="3-7 años">3-7 años</option><option value="8-11 años">8-11 años</option><option value="12-15 años">12-15 años</option><option value="16-18 años">16-18 años</option><option value="19-24 años">19-24 años</option><option value="25-30 años">25-30 años</option><option value="30-35 años">30-35 años</option><option value="36-40 años">36-40 años</option><option value="41-50 años">41-50 años</option><option value="51 ó +años">51-Más años</option></select></td><td><select name="a_sexo[]" id="a_sexo[]" required><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option></select></td><td><select name="parentesco[]" id="parentesco[]" required><option value="Esposo(a)">Esposo(a)</option><option value="Hijo(a)">Hijo(a)</option><option value="Sobrino(a)">Sobrino(a)</option><option value="Padre">Padre</option><option value="Madre">Madre</option><option value="Abuelo(a)">Abuelo(a)</option><option value="Nieto(a)">Nieto(a)</option><option value="Hermano(a)">Hermano(a)</option><option value="Primo(a)">Primo(a)</option><option value="Tío(a)">Tío(a)</option><option value="Discípulo(a)">Discípulo(a)</option><option value="Co-discípulo(a)">Co-discípulo(a)</option><option value="Pastor(a)">Pastor(a)</option><option value="Líder">Líder</option><option value="Amigo(a)">Amigo(a)</option></select></td>');
+			}
+	});
+});
