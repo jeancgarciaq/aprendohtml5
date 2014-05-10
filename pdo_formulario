@@ -1,0 +1,24 @@
+<?php
+$dsn = 'mysql:host=localhost;dbname=comercit_ventas';
+$nombre_usuario = 'comercit_admin';
+$contraseña = 'Iri(ipzy&T0J';
+$opciones = array(
+    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+); 
+
+$gbd = new PDO($dsn, $nombre_usuario, $contraseña, $opciones);
+
+try {
+    $gbd = new PDO('mysql:host=localhost;dbname=comercit_ventas', $usuario, $contraseña);
+    foreach($gbd->query('SELECT * from FOO') as $fila) {
+        print_r($fila);
+    }
+    $gbd = null;
+} catch (PDOException $e) {
+    print "¡Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+
+//Se cierra la conexión
+$gbd = null;
+?>
