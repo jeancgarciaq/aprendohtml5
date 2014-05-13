@@ -33,29 +33,28 @@ $llegada = date('Y-m-d', strtotime($_POST['fecha1']));
 //fecha de salida
 $salida = date('Y-m-d', strtotime($_POST['fecha2']));
 
-//Esta es la tercera tabla Acompañantes
-//$a_nombre = (implode(',', $_POST['a_nombre']));	
-/*$a_edad = var_dump(',', $_POST['a_edad[]']);
-$a_sexo = var_dump(',', $_POST['a_sexo[]']);
-$parentesco = var_dump(',', $_POST['parentesco[]']);*/
-
-//Validamos la identificación y el email
+//Validamos la identificación
 if ($identificacion != $re_identificacion) {
-	die('No coincide el número de identificación<br><a href="/Formulario Inscripcion.html">Volver</a>');
+	die('No coincide el número de identificación<br><a href="/Formulario.php">Volver</a>');
 }
+//Validamos el email
 if ($mi_email != $re_mi_email) {
-	die('No coincide el correo<br><a href="/Formulario Inscripción.html">Volver</a>');
+	die('No coincide el correo<br><a href="/Formulario.php">Volver</a>');
 }
 
 //Ingresar la información a la base de datos, primero se verifica si es de Venezuela
 if ($paises == 'Venezuela'){
+
 	//Se verifica el numero de idenficacion
-	$nuevo_registro = mysqli_query($mysqli, "SELECT Identificacion FROM Inscripcion where Identificacion='$identificacion'");
-	if (mysqli_num_rows($nuevo_registro)>0) {
-		echo "<p>Esta persona ya está registrada</p><p><a href='/Formulario Inscripcion.html'>Volver</a></p>";}
+	$nuevo_registro = $mysqli->query("SELECT Identificacion FROM Inscripcion where Identificacion='$identificacion'");
+	if ($mysqli->num_rows($nuevo_registro)>0) {
+		echo "<p>Esta persona ya está registrada</p><p><a href='/Formulario.php'>Volver</a></p>";}
+
 	//Si no existe se inserta el registro
 	else {
 		$sql = "INSERT INTO Inscripcion (Pais, Nombre, Identificacion, Sexo, Edad, Correo, Ciudad, Estado, Fecha, Llegada, Salida) VALUES ('$paises', '$nombre', '$identificacion', '$sexo', '$edad', '$mi_email', '$ciudad', '$estado', '$fecha', '$llegada', '$salida')";
+		
+		//Se verifica que todo salió bien
 		if ($mysqli->query($sql)=== true) {
 			echo 'Nueva Inscripcion con id: ' . $mysqli->insert_id . ' ha sido a&ntildeadida.';}
 		else {
@@ -66,6 +65,8 @@ if ($paises == 'Venezuela'){
 //Si no es de Venezuela, se inserta solamente estos datos
 else {
 	$sql = "INSERT INTO Inscripcion (Pais, Nombre, Identificacion, Sexo, Edad, Correo, Fecha) VALUES ('$paises', '$nombre', '$identificacion', '$sexo', '$edad', '$mi_email', '$fecha')";
+	
+	//Se verifica que todo salió bien
 	if ($mysqli->query($sql)=== true) {
 		echo 'Nueva Inscripcion con id: ' . $mysqli->insert_id . ' ha sido a&ntildeadida.';}
 	else {
@@ -75,31 +76,43 @@ else {
 
 //Ingresamos datos para la logística
 $logistica = "INSERT INTO Hospedaje (Nombre, Identificacion, Hospedaje, Transporte, Acompañado) VALUES ('$nombre', '$identificacion', '$hospedaje', '$transporte', '$pareja')";
+	//Verificamos que todo esté bien
 	if ($mysqli->query($logistica)=== true) {
 		echo 'Sus Acompañantes con id: ' . $mysqli->insert_id . ' han sido registrados.';}
 	else {
-		echo "ERROR: No fue posible ejecutar $sql. " . $mysqli->error;
+		echo "ERROR: No fue posible ejecutar $logistica. " . $mysqli->error;
 	}
 
 //Inscribir a los acompañantes
 if ($pareja == 'Acompanado') {
-	$mysqli->query('INSERT INTO Acompañantes ('.json_encode($_POST['a_nombre']).')');
-	$sql = $mysqli->query("SELECT Nombre FROM Acompañantes WHERE 1");
-	$ROW = $sql->fetch_assoc();
-	$array = json_decode($ROW['Nombre'],true);}
+//Nombre del acompañante
+	$anombre = array();
+	foreach($_POST['anombre'] as $key=>$value)
+	$anombre [] = $value;
+	var_dump($anombre);
+//Sexo del acompañante
+	$asexo = array();
+	foreach($_POST['asexo'] as $key=>$value)
+	$asexo [] = $value;
+	var_dump($asexo);
+//Edad del acompañante
+	$aedad = array();
+	foreach($_POST['aedad'] as $key=>$value)
+	$aedad [] = $value;
+	var_dump($aedad);
+//Parentesco del acompañante
+	$parentesco = array();
+	foreach($_POST['parentesco'] as $key=>$value)
+	$parentesco [] = $value;
+	var_dump($parentesco);	
 
-//$acompano = 'INSERT INTO Acompañantes (Nombre) VALUES ("'.implode(',', $_POST['a_nombre']).'")';
-	
-	if ($mysqli->query($acompano)=== true) {
-		echo 'Sus Acompañantes con id: ' . $mysqli->insert_id . ' han sido registrados.';}
-	else {
-		echo "ERROR: No fue posible ejecutar $sql. " . $mysqli->error;
+//Insertamos
+	for ($i = 0; $i <count($anombre); $i++) {	
+	$mysqli->query("INSERT INTO Acompanantes (Nombre, Sexo, Edad, Parentesco) VALUES ('$anombre[$i]', '$asexo[$i]', '$aedad[$i]', '$parentesco[$i]')");
 	}
 
-/*$sql= 'INSERT INTO input_field (firstname)
-       VALUES
-       ("'.implode(',', $_POST['firstname']).'")';*/
+}
+
 // cierra conexión
 $mysqli->close();
-
 ?>
