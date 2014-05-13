@@ -1,7 +1,7 @@
 <?php
 $dsn = 'mysql:host=localhost;dbname=comercit_ventas';
-$nombre_usuario = 'comercit_admin';
-$contraseña = 'Iri(ipzy&T0J';
+$nombre_usuario = 'mi_usuario';
+$contraseña = 'mi_clave';
 $opciones = array(
     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
 ); 
