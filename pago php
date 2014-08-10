@@ -1,0 +1,184 @@
+<?php
+//Conexión con la base de datos
+$mysqli = new mysqli("localhost", "comercit_admin", "Iri(ipzy&T0J", "comercit_ventas");
+		if ($mysqli === false) {
+								die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
+								}
+
+//Codificamos los caracteres a UTF-8
+$mysqli->set_charset("utf8");
+//Obtenemos los datos del Formulario
+//Tabla Cliente
+$seudonimo = $_POST['seudonimo'];
+var_dump($seudonimo);
+$nombre = $_POST['nombre'];
+var_dump($nombre);
+$identidad = $_POST['identidad'];
+var_dump($identidad);
+$re_identidad= $_POST['re_identidad'];
+var_dump($re_identidad);
+$correo = $_POST['correo'];
+var_dump($correo);
+$re_correo = $_POST['re_correo'];
+var_dump($re_correo);
+$movil = $_POST['movil'];
+var_dump($movil);
+$re_movil = $_POST['re_movil'];
+var_dump($re_movil);
+$direccion = $_POST['direccion'];
+var_dump($direccion);
+$ciudad = $_POST['ciudad'];
+var_dump($ciudad);
+$estado = $_POST['estado'];
+var_dump($estado);
+
+//Tabla Producto
+$producto = $_POST['producto'];
+var_dump($producto);
+$cantidad = $_POST['cantidad'];
+var_dump($cantidad);
+$talla = $_POST['talla'];
+var_dump($talla);
+$color = $_POST['color'];
+var_dump($color);
+$modelo = $_POST['modelo'];
+var_dump($modelo);
+
+//Tabla Pago
+$pague = $_POST['pague'];
+var_dump($pague);
+$origen = $_POST['origen'];
+var_dump($origen);
+$destino = $_POST['destino'];
+var_dump($destino);
+$operacion = $_POST['operacion'];
+var_dump($operacion);
+$fecha = date('Y-m-d', strtotime($_POST['fecha']));
+var_dump($fecha);
+$monto = $_POST['monto'];
+var_dump($monto);
+
+//Tabla Envío
+$e_nombre = $_POST['e_nombre'];
+var_dump($e_nombre);
+$e_identidad = $_POST['e_identidad'];
+var_dump($e_identidad);
+$e_movil = $_POST['e_movil'];
+var_dump($e_movil);
+$e_direccion = $_POST['e_direccion'];
+var_dump($e_direccion);
+$e_ciudad = $_POST['e_ciudad'];
+var_dump($e_ciudad);
+$e_estado = $_POST['e_estado'];
+var_dump($e_estado);
+
+//Validamos la identificación
+if ($identidad != $re_identidad) {
+	die('No coincide el número de identificación<br><a href="/Pago.html">Volver</a>');
+}
+
+//Validamos el email
+if ($correo != $re_correo) {
+	die('No coincide el correo<br><a href="/Pago.html">Volver</a>');
+}
+
+//Validamos el teléfono
+if ($movil != $re_movil) {
+	die('No coincide el Nº de teléfono<br><a href="/Pago.html">Volver</a>');
+}
+
+//Insertamos los valores en la Tabla Cliente
+$Cliente = "INSERT INTO Cliente (Seudonimo, Nombre, Cedula, Correo, Celular, Direccion, Ciudad, Estado) VALUES ('$seudonimo', '$nombre', '$identidad', '$correo', '$movil', '$direccion', '$ciudad', '$estado')";
+
+if ($mysqli->query($Cliente)=== true) {
+		echo 'Sus datos han sido registrados.';}
+	else {
+		echo "ERROR: No fue posible ejecutar $cliente. " . $mysqli->error;
+	}
+
+//Insertamos los valores en la Tabla Producto, ya está lista
+$Producto = "INSERT INTO Producto (Producto, Cantidad, Talla, Color, Modelo) VALUES ('$producto', '$cantidad', '$talla', '$color', '$modelo')";
+
+if ($mysqli->query($Producto)=== true) {
+		echo 'Su pedido fue registrado.';}
+	else {
+		echo "ERROR: No fue posible ejecutar $Producto. " . $mysqli->error;
+	}
+
+//Insertamos los valores en la Tabla Pago
+switch ($pague) {
+	case 'MercadoPago':
+		$Pago = "INSERT INTO Pago (Forma, Operacion, Fecha, Monto, Cedula) VALUES ('$pague', '$operacion', '$fecha', '$monto', '$identidad')";
+		break;
+	case 'Deposito':
+		$Pago = "INSERT INTO Pago (Forma, Banco Destino, Operacion, Fecha, Monto, Cedula) VALUES ('$pague', '$destino', '$operacion', '$fecha', '$monto', '$identidad')";
+		break;
+	case 'Transferencia':
+		$Pago = "INSERT INTO Pago (Forma, Banco Origen, Banco Destino, Operacion, Fecha, Monto, Cedula) VALUES ('$pague', '$origen', '$destino', '$operacion', '$fecha', '$monto', '$identidad')";
+		break;
+	default:
+		if ($mysqli->query($Pago)=== true) {
+				echo 'Su pago fue registrado.';}
+				else {
+					echo "ERROR: No fue posible ejecutar $Pago. " . $mysqli->error;
+					}
+		break;
+}
+/*if ($pague == 'MercadoPago') {
+	}
+
+	//Verificamos que los datos se insertaron
+	if ($mysqli->query($Pago)=== true) {
+										echo 'Su pago fue registrado.';}
+									else {
+										echo "ERROR: No fue posible ejecutar $Pago. " . $mysqli->error;
+											}
+
+//Si no es Mercadopago es Depósito, se repite la operación
+	elseif ($pague == 'Deposito') {
+		$Pago = "INSERT INTO Pago (Forma, Banco Destino, Operacion, Fecha, Monto, Cedula) VALUES ('$pague', '$destino', '$operacion', '$fecha', '$monto', '$identidad')";}
+
+			//Verificamos que los datos se insertaron
+			if ($mysqli->query($Pago)=== true) {
+				echo 'Su pago fue registrado.';}
+				else {
+					echo "ERROR: No fue posible ejecutar $Pago. " . $mysqli->error;
+					}
+
+//Y sino es MercadoPago ni Depósito entonces es Transferencia, se repite la operación
+	else ($pague == 'Transferencia') {
+	 	$Pago = "INSERT INTO Pago (Forma, Banco Origen, Banco Destino, Operacion, Fecha, Monto, Cedula) VALUES ('$pague', '$origen', '$destino', '$operacion', '$fecha', '$monto', '$identidad')";}
+			//Verificamos que los datos se insertaron
+			if ($mysqli->query($Pago)=== true) {
+				echo 'Su pago fue registrado.';}
+			else {
+				echo "ERROR: No fue posible ejecutar $Pago. " . $mysqli->error;
+				}*/
+//Fin de la Tabla Pago
+
+//Insertamos los valores en la Tabla Envío, está bien
+$Envio = "INSERT INTO Envio (Nombre, Cedula, Telefono, Direccion, Ciudad, Estado) VALUES ('$e_nombre', '$e_identidad', '$e_movil', '$e_direccion', '$e_ciudad', '$e_estado')";
+
+if ($mysqli->query($Envio)=== true) {
+		echo 'Su pago fue registrado.';}
+	else {
+		echo "ERROR: No fue posible ejecutar $Pago. " . $mysqli->error;
+	}
+
+echo "Su Pago se ha registrado Exitosamente";
+
+//Cerramos la conexión
+$mysqli->close();
+
+//Me envío un email notificándome el registro del pago
+// El mensaje
+$mensaje = "Se ha Registrado un Pago";
+
+// Si cualquier línea es más larga de 70 caracteres, se debería usar wordwrap()
+$mensaje = wordwrap($mensaje, 70, "\r\n");
+
+// Enviarlo
+mail('ventas@comercito.com', 'Registro de Pago', $mensaje);
+
+echo "Ya notificamos al Vendedor de tu Pago";
+?>
