@@ -5,258 +5,169 @@
 	<body>
 	<section>
 		<?php
+			//Obtenemos el JSON desde localbitcoins
 			$data = file_get_contents("https://localbitcoins.com//bitcoinaverage/ticker-all-currencies/");
+			
+			//Decodificamos para imprimir
+			$decode = json_decode($data, true);
+			
+			//Este es el array por símbolo, cada símbolo es un objeto de Posicion=>Valor, necesito acceder solamente al valor
+			$vef = $decode{'VEF'};
 		
-		// Título para el Peso Colombiano
-		echo "<h3><strong>Peso Colombiano (COP)</strong></h3>";
+			// Un Título para Bolívar Fuerte
+			echo "<h1><strong>Bolívar Fuerte Venezolano (VEF)</strong></h1>";
+			
+			// Creamos la tabla para vaciar los datos VEF
+			echo "<table>";
+				echo "<tbody>";
+					echo "<tr>";
+						// Promedio VEF 1 Hora
+						$prom_1 = $vef['avg_1h'];
+						// Configuramos el formato numero
+						$vef_num1 = number_format($prom_1, 2, ',', '.');
+						echo "<td><strong>Prom 1H:</strong></td>";
+						echo "<td>$vef_num1</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio VEF 6 Horas
+						$prom_6 = $vef['avg_6h'];
+						// Configuramos el formato numero
+						$vef_num6 = number_format($prom_6, 2, ',', '.');
+						echo "<td><strong>Prom 6H:</strong></td>";
+						echo "<td>$vef_num6</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio VEF 12 Horas
+						$prom_12 = $vef['avg_12h'];
+						// Configuramos el formato numero
+						$vef_num12 = number_format($prom_12, 2, ',', '.');
+						echo "<td><strong>Prom 12H:</strong></td>";
+						echo "<td>$vef_num12</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio VEF 24 Horas
+						$prom_24 = $vef['avg_24h'];
+						// Configuramos el formato numero
+						$vef_num24 = number_format($prom_24, 2, ',', '.');
+						echo "<td><strong>Prom 24H:</strong></td>";
+						echo "<td>$vef_num24</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Volumen en Bitcoin
+						$prom_btc = $vef['volume_btc'];
+						// Configuramos el formato numero
+						$vef_btc = number_format($prom_btc, 8, ',', '.');
+						echo "<td><strong>Vol en BTC:</strong></td>";
+						echo "<td>$vef_btc</td>";
+					echo "</tr>";
+				echo "</tbody>";
+			echo "</table>";	
+			
+			//Este es el array por símbolo, cada símbolo es un objeto de Posicion=>Valor, necesito acceder solamente al valor
+			$usd = $decode{'USD'};
 		
-		// Creamos la tabla para vaciar los datos COP
-		echo "<table>";
-			echo "<tbody>";
-				echo "<tr>";
-					// Promedio COP 1 Hora
-					$cop_1h = substr ($data, 101, 11);
-					// Configuramos el formato numero
-					$cop_num1 = number_format($cop_1h, 2, ',', '.');
-					echo "<td><strong>Prom 1H:</strong></td>";
-					echo "<td>$cop_num1</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio COP 6 Horas
-					$cop_6h = substr ($data, 160, 11);
-					// Configuramos el formato numero
-					$cop_num6 = number_format($cop_6h, 2, ',', '.');
-					echo "<td><strong>Prom 6H:</strong></td>";
-					echo "<td>$cop_num6</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio COP 12 Horas
-					$cop_12h = substr ($data, 21, 11);
-					// Configuramos el formato numero
-					$cop_num12 = number_format($cop_12h, 2, ',', '.');
-					echo "<td><strong>Prom 12H:</strong></td>";
-					echo "<td>$cop_num12</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio COP 24 Horas
-					$cop_24h = substr ($data, 76, 11);
-					// Configuramos el formato numero
-					$cop_num24 = number_format($cop_24h, 2, ',', '.');
-					echo "<td><strong>Prom 24H:</strong></td>";
-					echo "<td>$cop_num24</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Volumen en Bitcoin
-					$cop_vbtc = substr ($data, 50, 11);
-					// Configuramos el formato numero
-					$cop_numv = number_format($cop_vbtc, 8, ',', '.');
-					echo "<td><strong>Vol en BTC:</strong></td>";
-					echo "<td>$cop_numv</td>";
-				echo "</tr>";
-			echo "</tbody>";
-		echo "</table>";
+			// Un Título para el Dólar Americano
+			echo "<h2><strong>Dólar Estado Unidense (USD)</strong></h2>";
+			
+			// Creamos la tabla para vaciar los datos USD
+			echo "<table>";
+				echo "<tbody>";
+					echo "<tr>";
+						// Promedio USD 1 Hora
+						$usa_1 = $usd['avg_1h'];
+						// Configuramos el formato numero
+						$usa_num1 = number_format($usa_1, 2, ',', '.');
+						echo "<td><strong>Prom 1H:</strong></td>";
+						echo "<td>$usa_num1</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio USD 6 Horas
+						$usa_6 = $usd['avg_6h'];
+						// Configuramos el formato numero
+						$usa_num6 = number_format($usa_6, 2, ',', '.');
+						echo "<td><strong>Prom 6H:</strong></td>";
+						echo "<td>$usa_num6</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio USD 12 Horas
+						$usa_12 = $usd['avg_12h'];
+						// Configuramos el formato numero
+						$usa_num12 = number_format($usa_12, 2, ',', '.');
+						echo "<td><strong>Prom 12H:</strong></td>";
+						echo "<td>$usa_num12</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio USD 24 Horas
+						$usa_24 = $usd['avg_24h'];
+						// Configuramos el formato numero
+						$usa_num24 = number_format($usa_24, 2, ',', '.');
+						echo "<td><strong>Prom 24H:</strong></td>";
+						echo "<td>$usa_num24</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Volumen en Bitcoin
+						$usa_btc = $usd['volume_btc'];
+						// Configuramos el formato numero
+						$usa_btc = number_format($usa_btc, 8, ',', '.');
+						echo "<td><strong>Vol en BTC:</strong></td>";
+						echo "<td>$usa_btc</td>";
+					echo "</tr>";
+				echo "</tbody>";
+			echo "</table>";	
+			
+			//Este es el array por símbolo, cada símbolo es un objeto de Posicion=>Valor, necesito acceder solamente al valor
+			$eur = $decode{'EUR'};
 		
-		
-		// Título para el Dólar
-		echo "<h2><strong>Dólar Estadounidense (USD)</strong></h2>";
-		
-		// Creamos la tabla para vaciar los datos USD
-		echo "<table>";
-			echo "<tbody>";
-				echo "<tr>";
-					// Promedio USD 1 Hora
-					$usd_1h = substr ($data, 270, 11);
-					// Configuramos el formato numero
-					$usd_num1 = number_format($usd_1h, 2, ',', '.');
-					echo "<td><strong>Prom 1H:</strong></td>";
-					echo "<td>$usd_num1</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio USD 6 Horas
-					$usd_6h = substr ($data, 323, 11);
-					// Configuramos el formato numero
-					$usd_num6 = number_format($usd_6h, 2, ',', '.');
-					echo "<td><strong>Prom 6H:</strong></td>";
-					echo "<td>$usd_num6</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio USD 12 Horas
-					$usd_12h = substr ($data, 195, 11);
-					// Configuramos el formato numero
-					$usd_num12 = number_format($usd_12h, 2, ',', '.');
-					echo "<td><strong>Prom 12H:</strong></td>";
-					echo "<td>$usd_num12</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio USD 24 Horas
-					$usd_24h = substr ($data, 248, 11);
-					// Configuramos el formato numero
-					$usd_num24 = number_format($usd_24h, 2, ',', '.');
-					echo "<td><strong>Prom 24H:</strong></td>";
-					echo "<td>$usd_num24</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Volumen en Bitcoin
-					$usd_vbtc = substr ($data, 221, 11);
-					// Configuramos el formato numero
-					$usd_numv = number_format($usd_vbtc, 8, ',', '.');
-					echo "<td><strong>Vol en BTC:</strong></td>";
-					echo "<td>$usd_numv</td>";
-				echo "</tr>";
-			echo "</tbody>";
-		echo "</table>";
-		
-		// Un Título Nuevo Dólar Taiwanés
-		echo "<h3><strong>Nuevo Dólar Taiwanés (TWD)</strong></h3>";
-		
-		// Creamos la tabla para vaciar los datos TWD
-		echo "<table>";
-			echo "<tbody>";
-				echo "<tr>";
-					// Promedio TWD 1 Hora
-					$twd_1h = substr ($data, 270, 11);
-					// Configuramos el formato numero
-					$twd_num1 = number_format($twd_1h, 2, ',', '.');
-					echo "<td><strong>Prom 1H:</strong></td>";
-					echo "<td>$twd_num1</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio TWD 6 Horas
-					$twd_6h = substr ($data, 323, 11);
-					// Configuramos el formato numero
-					$twd_num6 = number_format($twd_6h, 2, ',', '.');
-					echo "<td><strong>Prom 6H:</strong></td>";
-					echo "<td>$twd_num6</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio TWD 12 Horas
-					$twd_12h = substr ($data, 355, 11);
-					// Configuramos el formato numero
-					$twd_num12 = number_format($twd_12h, 2, ',', '.');
-					echo "<td><strong>Prom 12H:</strong></td>";
-					echo "<td>$twd_num12</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio TWD 24 Horas
-					$twd_24h = substr ($data, 407, 11);
-					// Configuramos el formato numero
-					$twd_num24 = number_format($twd_24h, 2, ',', '.');
-					echo "<td><strong>Prom 24H:</strong></td>";
-					echo "<td>$twd_num24</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Volumen en Bitcoin
-					$twd_vbtc = substr ($data, 382, 11);
-					// Configuramos el formato numero
-					$twd_numv = number_format($twd_vbtc, 8, ',', '.');
-					echo "<td><strong>Vol en BTC:</strong></td>";
-					echo "<td>$twd_numv</td>";
-				echo "</tr>";
-			echo "</tbody>";
-		echo "</table>";		
-		
-		// Un Título Cedi de Ghana
-		echo "<h3><strong>Cedi de Ghana (GHS)</strong></h3>";
-		
-		// Creamos la tabla para vaciar los datos GHS
-		echo "<table>";
-			echo "<tbody>";
-				echo "<tr>";
-					// Promedio GHS 1 Hora
-					$ghs_1h = substr ($data, 545, 11);
-					// Configuramos el formato numero
-					$ghs_num1 = number_format($ghs_1h, 2, ',', '.');
-					echo "<td><strong>Prom 1H:</strong></td>";
-					echo "<td>$ghs_num1</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio GHS 6 Horas
-					$ghs_6h = substr ($data, 598, 11);
-					// Configuramos el formato numero
-					$ghs_num6 = number_format($ghs_6h, 2, ',', '.');
-					echo "<td><strong>Prom 6H:</strong></td>";
-					echo "<td>$ghs_num6</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio GHS 12 Horas
-					$ghs_12h = substr ($data, 472, 11);
-					// Configuramos el formato numero
-					$ghs_num12 = number_format($ghs_12h, 2, ',', '.');
-					echo "<td><strong>Prom 12H:</strong></td>";
-					echo "<td>$ghs_num12</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio GHS 24 Horas
-					$ghs_24h = substr ($data, 523, 11);
-					// Configuramos el formato numero
-					$ghs_num24 = number_format($ghs_24h, 2, ',', '.');
-					echo "<td><strong>Prom 24H:</strong></td>";
-					echo "<td>$ghs_num24</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Volumen en Bitcoin
-					$ghs_vbtc = substr ($data, 498, 11);
-					// Configuramos el formato numero
-					$ghs_numv = number_format($ghs_vbtc, 8, ',', '.');
-					echo "<td><strong>Vol en BTC:</strong></td>";
-					echo "<td>$ghs_numv</td>";
-				echo "</tr>";
-			echo "</tbody>";
-		echo "</table>";		
-		
-		// Un Título para Bolívar Fuerte
-		echo "<h2><strong>Bolívar Fuerte Venezolano (VEF)</strong></h2>";
-		
-		// Creamos la tabla para vaciar los datos VEF
-		echo "<table>";
-			echo "<tbody>";
-				echo "<tr>";
-					// Promedio VEF 1 Hora
-					$vef_1h = substr ($data, 6037, 16);
-					// Configuramos el formato numero
-					$vef_num1 = number_format($vef_1h, 2, ',', '.');
-					echo "<td><strong>Prom 1H:</strong></td>";
-					echo "<td>$vef_num1</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio VEF 6 Horas
-					$vef_6h = substr ($data, 6100, 16);
-					// Configuramos el formato numero
-					$vef_num6 = number_format($vef_6h, 2, ',', '.');
-					echo "<td><strong>Prom 6H:</strong></td>";
-					echo "<td>$vef_num6</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio VEF 12 Horas
-					$vef_12h = substr ($data, 5953, 16);
-					// Configuramos el formato numero
-					$vef_num12 = number_format($vef_12h, 2, ',', '.');
-					echo "<td><strong>Prom 12H:</strong></td>";
-					echo "<td>$vef_num12</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Promedio VEF 24 Horas
-					$vef_24h = substr ($data, 6010, 16);
-					// Configuramos el formato numero
-					$vef_num24 = number_format($vef_24h, 2, ',', '.');
-					echo "<td><strong>Prom 24H:</strong></td>";
-					echo "<td>$vef_num24</td>";
-				echo "</tr>";
-				echo "<tr>";
-					// Volumen en Bitcoin
-					$vef_vbtc = substr ($data, 5984, 11);
-					// Configuramos el formato numero
-					$vef_numv = number_format($vef_vbtc, 8, ',', '.');
-					echo "<td><strong>Vol en BTC:</strong></td>";
-					echo "<td>$vef_numv</td>";
-				echo "</tr>";
-			echo "</tbody>";
-		echo "</table>";		
-		
+			// Un Título para el EURO
+			echo "<h2><strong>El Euro</strong></h2>";
+			
+			// Creamos la tabla para vaciar los datos EUR
+			echo "<table>";
+				echo "<tbody>";
+					echo "<tr>";
+						// Promedio USD 1 Hora
+						$euro_1 = $eur['avg_1h'];
+						// Configuramos el formato numero
+						$euro_num1 = number_format($euro_1, 2, ',', '.');
+						echo "<td><strong>Prom 1H:</strong></td>";
+						echo "<td>$euro_num1</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio USD 6 Horas
+						$euro_6 = $eur['avg_6h'];
+						// Configuramos el formato numero
+						$euro_num6 = number_format($euro_6, 2, ',', '.');
+						echo "<td><strong>Prom 6H:</strong></td>";
+						echo "<td>$euro_num6</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio USD 12 Horas
+						$euro_12 = $eur['avg_12h'];
+						// Configuramos el formato numero
+						$euro_num12 = number_format($euro_12, 2, ',', '.');
+						echo "<td><strong>Prom 12H:</strong></td>";
+						echo "<td>$euro_num12</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Promedio USD 24 Horas
+						$euro_24 = $eur['avg_24h'];
+						// Configuramos el formato numero
+						$euro_num24 = number_format($euro_24, 2, ',', '.');
+						echo "<td><strong>Prom 24H:</strong></td>";
+						echo "<td>$euro_num24</td>";
+					echo "</tr>";
+					echo "<tr>";
+						// Volumen en Bitcoin
+						$euro_btc = $eur['volume_btc'];
+						// Configuramos el formato numero
+						$euro_btc = number_format($euro_btc, 8, ',', '.');
+						echo "<td><strong>Vol en BTC:</strong></td>";
+						echo "<td>$euro_btc</td>";
+					echo "</tr>";
+				echo "</tbody>";
+			echo "</table>";
+		//Se repite el proceso con todos los símbolos, espero que les sirva de ayuda.
 		?>
 	</section>
-<!--
-{"COP": {"avg_12h": "49989899.36", "volume_btc": "19.64096791", "avg_24h": "50308478.72", "avg_1h": "49575299.85", "rates": {"last": "50154900.62"}, "avg_6h": "49627918.70"}, "USD": {"avg_12h": "17663.87", "volume_btc": "124.78967482", "avg_24h": "17937.64", "avg_1h": "17434.10", "rates": {"last": "18655.81"}, "avg_6h": "17498.00"}, "TWD": {"avg_12h": "575830.05", "volume_btc": "2.93065371", "avg_24h": "539627.09", "rates": {"last": "576490.93"}}, "GHS": {"avg_12h": "82129.53", "volume_btc": "0.25264618", "avg_24h": "84089.42", "avg_1h": "73245.08", "rates": {"last": "73245.08"}, "avg_6h": "89361.14"}, "NGN": {"avg_12h": "6406638.14", "volume_btc": "45.83467886", "avg_24h": "6027085.48", "avg_1h": "6058448.08", "rates": {"last": "5598969.34"}, "avg_6h": "6204299.69"}, "EGP": {"avg_12h": "363364.39", "volume_btc": "0.09268364", "avg_24h": "366785.33", "rates": {"last": "345926.50"}, "avg_6h": "345926.50"}, "IDR": {"avg_12h": "219684958.59", "volume_btc": "0.29297907", "avg_24h": "233293115.44", "rates": {"last": "219684958.59"}}, "HNL": {"avg_12h": "473800.49", "volume_btc": "0.12663558", "avg_24h": "473800.49", "rates": {"last": "472701.49"}, "avg_6h": "473665.29"}, "ISK": {"avg_12h": "1807968.08", "volume_btc": "0.36971632", "avg_24h": "1816475.51", "rates": {"last": "1867733.35"}, "avg_6h": "1867733.35"}, "CRC": {"avg_12h": "10921263.64", "volume_btc": "0.11724377", "avg_24h": "8893434.00", "rates": {"last": "10921263.64"}, "avg_6h": "10921263.64"}, "PAB": {"avg_12h": "17933.95", "volume_btc": "7.99841260", "avg_24h": "18017.79", "avg_1h": "18178.29", "rates": {"last": "18648.00"}, "avg_6h": "17911.91"}, "AED": {"avg_12h": "66061.45", "volume_btc": "12.18823587", "avg_24h": "65635.83", "avg_1h": "61525.08", "rates": {"last": "61525.08"}, "avg_6h": "65933.10"}, "GBP": {"avg_12h": "13031.18", "volume_btc": "234.96099590", "avg_24h": "13088.03", "avg_1h": "12643.44", "rates": {"last": "12753.99"}, "avg_6h": "12829.48"}, "DOP": {"avg_12h": "803319.96", "volume_btc": "0.76161437", "avg_24h": "811627.16", "avg_1h": "788611.65", "rates": {"last": "750434.45"}, "avg_6h": "790692.46"}, "BAM": {"avg_12h": "31402.15", "volume_btc": "0.06339416", "avg_24h": "31136.78", "rates": {"last": "30876.80"}, "avg_6h": "30876.80"}, "LKR": {"avg_12h": "3218299.94", "volume_btc": "0.99081171", "avg_24h": "3138840.58", "rates": {"last": "2999875.01"}, "avg_6h": "2999875.01"}, "ETH": {"avg_12h": "20.38", "volume_btc": "0.14852360", "avg_24h": "21.14", "rates": {"last": "20.29"}, "avg_6h": "20.29"}, "RSD": {"avg_12h": "1864920.76", "volume_btc": "0.05774137", "avg_24h": "1864920.76", "rates": {"last": "1566201.55"}, "avg_6h": "1566201.55"}, "CAD": {"avg_12h": "23865.50", "volume_btc": "7.81186721", "avg_24h": "23228.86", "avg_1h": "22199.34", "rates": {"last": "31237.31"}, "avg_6h": "24000.83"}, "PKR": {"avg_12h": "2200400.98", "volume_btc": "15.62606609", "avg_24h": "2198294.58", "avg_1h": "2091228.46", "rates": {"last": "1911434.58"}, "avg_6h": "2161612.85"}, "JPY": {"avg_12h": "2620175.35", "volume_btc": "0.10280460", "avg_24h": "2657955.00", "rates": {"last": "2608075.16"}, "avg_6h": "2608075.16"}, "HUF": {"avg_12h": "5135973.82", "volume_btc": "0.35040540", "avg_24h": "4749214.96", "rates": {"last": "4999416.73"}}, "VND": {"avg_12h": "426682067.22", "volume_btc": "1.76557045", "avg_24h": "421090070.51", "rates": {"last": "359242468.84"}, "avg_6h": "359242468.84"}, "RON": {"avg_12h": "66764.63", "volume_btc": "2.52260163", "avg_24h": "66675.63", "avg_1h": "67345.30", "rates": {"last": "67345.30"}, "avg_6h": "66248.18"}, "OMR": {"avg_12h": "6794.05", "volume_btc": "0.27809416", "avg_24h": "6838.19", "rates": {"last": "6739.53"}, "avg_6h": "6739.53"}, "MYR": {"avg_12h": "73452.99", "volume_btc": "23.90801204", "avg_24h": "72965.90", "rates": {"last": "74551.76"}, "avg_6h": "72482.58"}, "AMD": {"avg_12h": "8668809.38", "volume_btc": "0.02422478", "avg_24h": "8668809.38", "rates": {"last": "8166531.92"}, "avg_6h": "8166531.92"}, "DKK": {"avg_12h": "104171.29", "volume_btc": "1.93095279", "avg_24h": "104171.29", "avg_1h": "93000.00", "rates": {"last": "93000.00"}, "avg_6h": "93726.58"}, "UAH": {"avg_12h": "498816.08", "volume_btc": "7.26588870", "avg_24h": "495823.40", "avg_1h": "473195.86", "rates": {"last": "493999.36"}, "avg_6h": "490410.17"}, "UGX": {"avg_12h": "68455749.09", "volume_btc": "0.23614726", "avg_24h": "68080055.60", "rates": {"last": "68225622.13"}, "avg_6h": "68225622.13"}, "KRW": {"volume_btc": "0.49672281", "avg_24h": "20131952.47", "rates": {"last": "20131952.47"}}, "SAR": {"avg_12h": "76361.86", "volume_btc": "4.41014448", "avg_24h": "76978.03", "avg_1h": "76435.90", "rates": {"last": "76435.90"}, "avg_6h": "75530.51"}, "SEK": {"avg_12h": "140421.10", "volume_btc": "24.68050345", "avg_24h": "141358.45", "avg_1h": "141134.01", "rates": {"last": "130190.19"}, "avg_6h": "138194.62"}, "SGD": {"avg_12h": "23691.71", "volume_btc": "13.38301954", "avg_24h": "23397.94", "rates": {"last": "24117.00"}, "avg_6h": "24126.40"}, "HKD": {"avg_12h": "143318.37", "volume_btc": "13.40388072", "avg_24h": "139183.91", "rates": {"last": "136333.95"}, "avg_6h": "136333.95"}, "AUD": {"avg_12h": "23477.36", "volume_btc": "49.57345569", "avg_24h": "23276.14", "avg_1h": "21514.24", "rates": {"last": "20627.60"}, "avg_6h": "22019.79"}, "CHF": {"avg_12h": "18438.77", "volume_btc": "5.02410623", "avg_24h": "18406.84", "rates": {"last": "17432.84"}, "avg_6h": "16499.76"}, "IRR": {"avg_12h": "825849257.46", "volume_btc": "10.62014618", "avg_24h": "821150711.16", "avg_1h": "820000195.24", "rates": {"last": "820000131.20"}, "avg_6h": "807620353.85"}, "TZS": {"avg_12h": "46201092.37", "volume_btc": "0.26253712", "avg_24h": "43335315.86", "rates": {"last": "50347397.04"}, "avg_6h": "47861107.95"}, "CNY": {"avg_12h": "120586.46", "volume_btc": "158.76300409", "avg_24h": "119925.76", "avg_1h": "268487.91", "rates": {"last": "266994.18"}, "avg_6h": "115847.68"}, "VEF": {"avg_12h": "1847609559.32", "volume_btc": "34.90955648", "avg_24h": "1857982532.43", "avg_1h": "1811412022.75", "rates": {"last": "1850000138.75"}, "avg_6h": "1827231466.62"}, "BDT": {"avg_12h": "1113719.32", "volume_btc": "0.01205260", "avg_24h": "1457569.32", "rates": {"last": "1113719.32"}}, "HRK": {"avg_12h": "108399.73", "volume_btc": "0.65252468", "avg_24h": "112084.80", "avg_1h": "108170.14", "rates": {"last": "107619.75"}, "avg_6h": "108890.55"}, "NZD": {"avg_12h": "24145.68", "volume_btc": "27.97576942", "avg_24h": "24957.30", "avg_1h": "24182.37", "rates": {"last": "26821.77"}, "avg_6h": "23675.60"}, "BYN": {"avg_12h": "36525.63", "volume_btc": "0.48061677", "avg_24h": "37036.39", "avg_1h": "37385.66", "rates": {"last": "39600.04"}, "avg_6h": "34725.29"}, "CLP": {"avg_12h": "12033683.14", "volume_btc": "2.76708154", "avg_24h": "12033319.10", "avg_1h": "11796546.65", "rates": {"last": "12439993.40"}, "avg_6h": "12023270.67"}, "THB": {"avg_12h": "584218.50", "volume_btc": "12.03727417", "avg_24h": "569707.20", "rates": {"last": "637442.07"}, "avg_6h": "542788.50"}, "EUR": {"avg_12h": "14999.14", "volume_btc": "54.91142910", "avg_24h": "15179.92", "avg_1h": "16149.78", "rates": {"last": "16205.00"}, "avg_6h": "14972.79"}, "TRY": {"avg_12h": "73705.19", "volume_btc": "3.02824237", "avg_24h": "71905.26", "rates": {"last": "70019.31"}, "avg_6h": "70416.74"}, "ARS": {"avg_12h": "351982.13", "volume_btc": "2.64079594", "avg_24h": "350728.84", "avg_1h": "332100.78", "rates": {"last": "317602.24"}, "avg_6h": "348810.35"}, "UYU": {"avg_12h": "527915.39", "volume_btc": "0.18425356", "avg_24h": "527915.39", "avg_1h": "475959.96", "rates": {"last": "475959.96"}, "avg_6h": "526359.58"}, "RWF": {"avg_12h": "17836185.34", "volume_btc": "0.01313374", "avg_24h": "17512148.10", "rates": {"last": "17836185.34"}}, "KZT": {"avg_12h": "6130378.99", "volume_btc": "0.79914754", "avg_24h": "6208219.66", "rates": {"last": "5921356.49"}, "avg_6h": "6085119.47"}, "NOK": {"avg_12h": "145346.59", "volume_btc": "31.30999126", "avg_24h": "148717.68", "avg_1h": "137284.55", "rates": {"last": "137284.55"}, "avg_6h": "142018.19"}, "RUB": {"avg_12h": "1087019.80", "volume_btc": "249.84873053", "avg_24h": "1071924.01", "avg_1h": "1073042.74", "rates": {"last": "1072731.17"}, "avg_6h": "1068004.75"}, "KES": {"avg_12h": "1944357.36", "volume_btc": "6.08910088", "avg_24h": "1922181.83", "avg_1h": "1958529.36", "rates": {"last": "1958529.36"}, "avg_6h": "1947048.28"}, "GTQ": {"avg_12h": "128564.47", "volume_btc": "0.00876603", "avg_24h": "128564.47", "rates": {"last": "128564.47"}, "avg_6h": "128564.47"}, "PEN": {"avg_12h": "61039.11", "volume_btc": "3.04530653", "avg_24h": "61695.03", "avg_1h": "63606.59", "rates": {"last": "63746.65"}, "avg_6h": "60315.31"}, "INR": {"avg_12h": "1186442.60", "volume_btc": "17.18347195", "avg_24h": "1172042.14", "avg_1h": "1164391.67", "rates": {"last": "1060510.24"}, "avg_6h": "1143372.23"}, "MXN": {"avg_12h": "360683.09", "volume_btc": "3.29665974", "avg_24h": "360286.21", "avg_1h": "363172.46", "rates": {"last": "385000.39"}, "avg_6h": "359450.22"}, "CZK": {"avg_12h": "374711.00", "volume_btc": "0.30973815", "avg_24h": "373290.89", "rates": {"last": "388257.24"}, "avg_6h": "372625.23"}, "BRL": {"avg_12h": "64168.46", "volume_btc": "5.22833809", "avg_24h": "64570.85", "avg_1h": "64223.35", "rates": {"last": "63398.65"}, "avg_6h": "61528.23"}, "MAD": {"avg_12h": "161956.64", "volume_btc": "1.40013812", "avg_24h": "162077.39", "rates": {"last": "171613.60"}, "avg_6h": "168741.71"}, "MMK": {"volume_btc": "0.10000000", "avg_24h": "24426938.60", "rates": {"last": "24426938.60"}}, "PLN": {"avg_12h": "61657.64", "volume_btc": "2.78031690", "avg_24h": "61705.17", "rates": {"last": "57949.82"}, "avg_6h": "59731.43"}, "PHP": {"avg_12h": "963499.36", "volume_btc": "2.14684790", "avg_24h": "838476.26", "rates": {"last": "961825.16"}}, "ZAR": {"avg_12h": "263994.40", "volume_btc": "10.10725501", "avg_24h": "246867.44", "avg_1h": "238917.49", "rates": {"last": "217594.16"}, "avg_6h": "260091.51"}, "ILS": {"avg_12h": "82792.84", "volume_btc": "0.04341849", "avg_24h": "82792.84", "rates": {"last": "69206.94"}}}
--->
 </body>
 </html>
